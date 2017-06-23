@@ -12,6 +12,13 @@ class ClienteJSONController {
         return $daoPersona->listarTodos();
     }
     
+    public static function getInfoCliente($idCliente) {
+        
+        
+     
+        return json_encode($cliente->jsonSerialize());
+    }        
+    
     public static function registrarPersona($rut, $nombre, $apellido,
                                             $fechaNacimiento, $email) {
         

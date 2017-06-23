@@ -37,7 +37,15 @@ class ClienteDAO implements GenericDAO{
         
     }
 
-    public function buscarPorId($idRegistro) {
+    public function buscarPorId($id) {
+        
+        $query = "SELECT * FROM persona WHERE persona_id = :id ";
+        
+        $sentencia = $this->conexion->prepare($query);
+        
+        $sentencia->bindParam(':id', $id);       
+              
+        return $sentencia->execute();
         
     }
 

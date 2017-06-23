@@ -9,7 +9,6 @@ class Cliente implements JsonSerializable {
     private $apellido;
     private $fecha_nac;
 
-    
     function getId() {
         return $this->id;
     }
@@ -42,7 +41,6 @@ class Cliente implements JsonSerializable {
         $this->fecha_nac = $fecha_nac;
     }
 
-        
     public function jsonSerialize() {
         $arregloAsociativo = Array("id" => $this->id,
             "nombre" => $this->nombre,

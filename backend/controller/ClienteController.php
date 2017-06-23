@@ -2,8 +2,9 @@
 
 include_once __DIR__ ."/../dao/DBConnection.php";
 include_once __DIR__ ."/../domain/Cliente.php";
+include_once __DIR__ ."/../dao/ClienteDAO.php";
 
-class ClienteJSONController {
+class ClienteController {
     
     public static function listarPersonasRegistradas() {
         $conexion = ConexionDB::getConexion();
@@ -14,9 +15,10 @@ class ClienteJSONController {
     
     public static function getInfoCliente($idCliente) {
         
-        
+        $clienteDAO = new ClienteDAO();
+        return $clienteDAO->buscarPorId($idCliente);
      
-        return json_encode($cliente->jsonSerialize());
+        //return json_encode($cliente->jsonSerialize());
     }        
     
     public static function registrarPersona($rut, $nombre, $apellido,

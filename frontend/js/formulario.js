@@ -54,61 +54,61 @@ jQuery(document).ready(function () {
     /**
      * Manejo del campo Regiones
      */
-    mostrarImagenCargando();
-    jQuery.getJSON("https://apis.modernizacion.cl/dpa/regiones", function (regiones) {
-        jQuery.each(regiones, function (indice, region) {
-            jQuery("select[name='region']").append("<option value=\"" + region.codigo + "\">" + region.nombre + "</option>");            
-        });
-        
-        ocultarImagenCargando();
-    });
+//    mostrarImagenCargando();
+//    jQuery.getJSON("https://apis.modernizacion.cl/dpa/regiones", function (regiones) {
+//        jQuery.each(regiones, function (indice, region) {
+//            jQuery("select[name='region']").append("<option value=\"" + region.codigo + "\">" + region.nombre + "</option>");            
+//        });
+//        
+//        ocultarImagenCargando();
+//    });
 
 
 
     /**
      * Manejo de provincias
      */
-    jQuery("select[name='region']").change(function () {
-        
-        mostrarImagenCargando();
-        jQuery.getJSON("https://apis.modernizacion.cl/dpa/regiones/" + jQuery(this).val() + "/provincias", function (provincias) {
-
-            jQuery("select[name='provincia'] option").remove();
-            jQuery("select[name='provincia']").append("<option value=\"\">-- Seleccione una provincia --</option>");
-
-            jQuery("select[name='comuna'] option").remove();
-            jQuery("select[name='comuna']").append("<option value=\"\">-- Seleccione una comuna --</option>");
-
-            jQuery.each(provincias, function (indice, provincia) {
-                jQuery("select[name='provincia']").append("<option value=\"" + provincia.codigo + "\">" + provincia.nombre + "</option>");                
-            });
-            
-            ocultarImagenCargando();
-        });
-    });
+//    jQuery("select[name='region']").change(function () {
+//        
+//        mostrarImagenCargando();
+//        jQuery.getJSON("https://apis.modernizacion.cl/dpa/regiones/" + jQuery(this).val() + "/provincias", function (provincias) {
+//
+//            jQuery("select[name='provincia'] option").remove();
+//            jQuery("select[name='provincia']").append("<option value=\"\">-- Seleccione una provincia --</option>");
+//
+//            jQuery("select[name='comuna'] option").remove();
+//            jQuery("select[name='comuna']").append("<option value=\"\">-- Seleccione una comuna --</option>");
+//
+//            jQuery.each(provincias, function (indice, provincia) {
+//                jQuery("select[name='provincia']").append("<option value=\"" + provincia.codigo + "\">" + provincia.nombre + "</option>");                
+//            });
+//            
+//            ocultarImagenCargando();
+//        });
+//    });
 
 
     /**
      * Manejo de provincias
      */
-    jQuery("select[name='provincia']").change(function () {
-        var codigoRegion = jQuery("select[name='region']").val();
-        var codigoProvincia = jQuery(this).val();
-
-        jQuery("select[name='comuna'] option").remove();
-        
-        mostrarImagenCargando();        
-        jQuery.getJSON("https://apis.modernizacion.cl/dpa/regiones/" + codigoRegion + "/provincias/" + codigoProvincia + "/comunas",
-                function (comunas) {
-                    jQuery("select[name='comuna']").append("<option value=\"\">-- Seleccione una comuna --</option>");
-                    jQuery.each(comunas, function (indice, comuna) {
-                        jQuery("select[name='comuna']").append("<option value=\"" + comuna.codigo + "\">" + comuna.nombre + "</option>");
-                    });
-                    
-                    ocultarImagenCargando();
-                }
-        );
-    });
+//    jQuery("select[name='provincia']").change(function () {
+//        var codigoRegion = jQuery("select[name='region']").val();
+//        var codigoProvincia = jQuery(this).val();
+//
+//        jQuery("select[name='comuna'] option").remove();
+//        
+//        mostrarImagenCargando();        
+//        jQuery.getJSON("https://apis.modernizacion.cl/dpa/regiones/" + codigoRegion + "/provincias/" + codigoProvincia + "/comunas",
+//                function (comunas) {
+//                    jQuery("select[name='comuna']").append("<option value=\"\">-- Seleccione una comuna --</option>");
+//                    jQuery.each(comunas, function (indice, comuna) {
+//                        jQuery("select[name='comuna']").append("<option value=\"" + comuna.codigo + "\">" + comuna.nombre + "</option>");
+//                    });
+//                    
+//                    ocultarImagenCargando();
+//                }
+//        );
+//    });
 
 });
 

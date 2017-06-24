@@ -1,24 +1,24 @@
 
 jQuery(document).ready(function () {
-    
+
     jQuery.ajaxSetup({
-        "error":function(respuesta, jqXHR, errorMsg) {            
-            ocultarImagenCargando();  
-            alert("ha ocurrido el siguiente error: "+errorMsg);
+        "error": function (respuesta, jqXHR, errorMsg) {
+            ocultarImagenCargando();
+            alert("ha ocurrido el siguiente error: " + errorMsg);
         }
     });
-       
-    
-    
+
+
+
 
     /**
      * Manejo del campo RUT
      */
-    jQuery("input[name='rut']").Rut({format_on:'keyup'});
+    jQuery("input[name='rut']").Rut({format_on: 'keyup'});
     jQuery("input[name='rut']").blur(function () {
         if (this.value !== "") {
-            
-            if(!validarRut()) {
+
+            if (!validarRut()) {
                 jQuery(this).addClass("error");
                 return;
             } else {
@@ -26,27 +26,28 @@ jQuery(document).ready(function () {
             }
 
             var rutSinFormato = jQuery.Rut.quitarFormato(this.value);
-            var mantisa = rutSinFormato.slice(0,rutSinFormato.length -1);
-            
-            mostrarImagenCargando();            
-            jQuery.getJSON("../../backend/HorasMedicas/backend/info-cliente.php",
-                    {id:mantisa},
-                    function (respuesta) {
-                        jQuery("input[name='nombre']").val(respuesta.nombre);
-                        jQuery("input[name='nombre']").attr("readonly", true);
+            var mantisa = rutSinFormato.slice(0, rutSinFormato.length - 1);
 
-                        jQuery("input[name='apellido']").val(respuesta.apellido);
-                        jQuery("input[name='apellido']").attr("readonly", true);
+            mostrarImagenCargando();
+            jQuery.getJSON('HorasMedicas/backend/info_cliente2.php', {id: mantisa}, function (resul) {
 
-                        jQuery("select[name='beneficiario'] option").remove();
-                        jQuery("select[name='beneficiario']").append("<option value=\"\">-- Seleccione el beneficiario --</option>");
+                jQuery("input[name='nombre']").val(resul.nombre);
+                jQuery("input[name='nombre']").attr("readonly", true);
 
+                jQuery("input[name='apellido']").val(resul.apellido);
+                jQuery("input[name='apellido']").attr("readonly", true);
+
+//                        jQuery("select[name='beneficiario'] option").remove();
+//                        jQuery("select[name='beneficiario']").append("<option value=\"\">-- Seleccione el beneficiario --</option>");
+//
 //                        jQuery.each(titular.beneficiarios, function (indice, beneficiario) {
 //                            jQuery("select[name='beneficiario']").append("<option value=\"" + beneficiario.id + "\">" + beneficiario.nombre + " " + beneficiario.apellido + "</option>");
 //                        });
 
-                        ocultarImagenCargando();
-                    });
+                ocultarImagenCargando();
+
+            });
+
         }
     });
 
@@ -123,6 +124,6 @@ function ocultarImagenCargando() {
 
 function validarRut() {
     var rut = jQuery("input[name='rut']").val();
-    
+
     return jQuery.Rut.validar(rut);
 }

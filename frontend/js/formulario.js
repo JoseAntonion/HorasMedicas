@@ -29,21 +29,21 @@ jQuery(document).ready(function () {
             var mantisa = rutSinFormato.slice(0,rutSinFormato.length -1);
             
             mostrarImagenCargando();            
-            jQuery.getJSON("/demo-ajax/backend/info-cliente.php",
+            jQuery.getJSON("../../backend/HorasMedicas/backend/info-cliente.php",
                     {id:mantisa},
-                    function (titular) {
-                        jQuery("input[name='nombre']").val(titular.nombre);
+                    function (respuesta) {
+                        jQuery("input[name='nombre']").val(respuesta.nombre);
                         jQuery("input[name='nombre']").attr("readonly", true);
 
-                        jQuery("input[name='apellido']").val(titular.apellido);
+                        jQuery("input[name='apellido']").val(respuesta.apellido);
                         jQuery("input[name='apellido']").attr("readonly", true);
 
                         jQuery("select[name='beneficiario'] option").remove();
                         jQuery("select[name='beneficiario']").append("<option value=\"\">-- Seleccione el beneficiario --</option>");
 
-                        jQuery.each(titular.beneficiarios, function (indice, beneficiario) {
-                            jQuery("select[name='beneficiario']").append("<option value=\"" + beneficiario.id + "\">" + beneficiario.nombre + " " + beneficiario.apellido + "</option>");
-                        });
+//                        jQuery.each(titular.beneficiarios, function (indice, beneficiario) {
+//                            jQuery("select[name='beneficiario']").append("<option value=\"" + beneficiario.id + "\">" + beneficiario.nombre + " " + beneficiario.apellido + "</option>");
+//                        });
 
                         ocultarImagenCargando();
                     });

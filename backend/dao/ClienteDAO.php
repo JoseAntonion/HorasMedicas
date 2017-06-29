@@ -5,6 +5,10 @@ include_once __DIR__ . "/../domain/Cliente.php";
 
 class ClienteDAO implements GenericDAO {
 
+    /**
+     *
+     * @var PDO
+     */
     private $conexion;
 
     public function __construct($conexion) {
@@ -38,10 +42,18 @@ class ClienteDAO implements GenericDAO {
 
     public function buscarPorId($id) {
 
-        $query = "SELECT * FROM persona WHERE PERSONA_ID = :id ";
+        $query = "SELECT PERSONA_NOMBRE, PERSONA_APELLIDO FROM persona WHERE PERSONA_ID = :id ";
         $sentencia = $this->conexion->prepare($query);
         $sentencia->bindParam(':id', $id);
-        return $sentencia->execute();
+        $sentencia->execute();
+        
+        if($fila = $sentencia->fetch()) {//verifica si la respuesta del execute trae valores, y los recorre
+            $cliente = new Cliente();
+            $cliente->setNombre($fila["PERSONA_NOMBRE"]);
+            $cliente->setApellido($fila["PERSONA_APELLIDO"]);
+        }
+        
+        return $cliente;
         
     }
 

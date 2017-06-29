@@ -29,7 +29,7 @@ jQuery(document).ready(function () {
             var mantisa = rutSinFormato.slice(0, rutSinFormato.length - 1);
 
             mostrarImagenCargando();
-            jQuery.getJSON('HorasMedicas/backend/info_cliente2.php', {id: mantisa}, function (resul) {
+            jQuery.getJSON('/HorasMedicas/backend/info-cliente2.php', {id: mantisa}, function (resul) {
 
                 jQuery("input[name='nombre']").val(resul.nombre);
                 jQuery("input[name='nombre']").attr("readonly", true);

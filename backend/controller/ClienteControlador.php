@@ -7,7 +7,7 @@ include_once __DIR__ ."/../dao/ClienteDAO.php";
 class ClienteControlador {
     
     public static function listarPersonasRegistradas() {
-        $conexion = ConexionDB::getConexion();
+        $conexion = DBConnection::getConexion();
         $daoPersona = new PersonaDAO($conexion);
         
         return $daoPersona->listarTodos();
@@ -15,10 +15,11 @@ class ClienteControlador {
     
     public static function getInfoCliente($idCliente) {
         
-        $conexion = ConexionDB::getConexion();
+        $conexion = DBConnection::getConexion();
         $clienteDAO = new ClienteDAO($conexion);
         
-        return $clienteDAO->buscarPorId($idCliente);
+        return json_encode($clienteDAO->buscarPorId($idCliente));
+        //json_encode transforma la respuesta de la llamada al metodo buscarPorId a un objeto json
         
      
         //return json_encode($cliente->jsonSerialize());

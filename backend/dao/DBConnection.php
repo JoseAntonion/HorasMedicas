@@ -12,8 +12,8 @@
 class DBConnection {
 
     const HOST = "localhost";
-    const DBNAME = "DAI5501_evaluacion3";
-    const PORT = "3306";
+    const DBNAME = "ExamenDAI";
+    const PORT = "80";
     const USER = "root";
     const PASS = "";
 

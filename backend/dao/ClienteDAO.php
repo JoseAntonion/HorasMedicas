@@ -42,15 +42,15 @@ class ClienteDAO implements GenericDAO {
 
     public function buscarPorId($id) {
 
-        $query = "SELECT PERSONA_NOMBRE, PERSONA_APELLIDO FROM persona WHERE PERSONA_ID = :id ";
+        $query = "SELECT nombre,apellido FROM persona WHERE rut = :id ";
         $sentencia = $this->conexion->prepare($query);
         $sentencia->bindParam(':id', $id);
         $sentencia->execute();
         
         if($fila = $sentencia->fetch()) {//verifica si la respuesta del execute trae valores, y los recorre
             $cliente = new Cliente();
-            $cliente->setNombre($fila["PERSONA_NOMBRE"]);
-            $cliente->setApellido($fila["PERSONA_APELLIDO"]);
+            $cliente->setNombre($fila["nombre"]);
+            $cliente->setApellido($fila["apellido"]);
         }
         
         return $cliente;

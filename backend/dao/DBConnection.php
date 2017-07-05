@@ -12,7 +12,7 @@
 class DBConnection {
 
     const HOST = "localhost";
-    const DBNAME = "ExamenDAI";
+    const DBNAME = "examendai";
     const PORT = "80";
     const USER = "root";
     const PASS = "";

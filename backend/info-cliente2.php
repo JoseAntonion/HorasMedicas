@@ -6,8 +6,7 @@ include __DIR__ ."/controller/ClienteControlador.php";
 
     if($_SERVER["REQUEST_METHOD"]=="GET") {
         if(isset($_GET["id"])) {
-            $id = $_GET["id"];
-            $json = ClienteControlador::getInfoCliente($id);
+            $json = ClienteControlador::getInfoCliente($_GET["id"]);
             echo $json;
         } else {
             echo "{\"error\": \"solictud incorrecta, no se ha enviado el parámetro 'id' del cliente\"";

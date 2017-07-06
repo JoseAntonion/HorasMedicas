@@ -55,17 +55,17 @@ class PersonaDAO implements GenericDAO {
         
         while($registro = $sentencia->fetch()) {            
             $persona = new Persona();
-            $persona->setRut($registro["rut"]);            
-            $persona->setContrasena($registro["contrasena"]);
-            $persona->setNombre($registro["nombre"]); 
-            $persona->setApellido($registro["apellido"]);
-            $persona->setFecha_nac($registro["fecha_nac"]); 
-            $persona->setSexo($registro["sexo"]); 
-            $persona->setDireccion($registro["direccion"]); 
-            $persona->setTelefono($registro["telefono"]); 
-            $persona->setValor_consulta($registro["valor_consulta"]); 
-            $persona->setFecha_contrato($registro["fecha_contrato"]); 
-            $persona->setId_perfil($registro["id_perfil"]); 
+            $persona->setRut($registro["RUT"]);            
+            $persona->setContrasena($registro["CONTRASENA"]);
+            $persona->setNombre($registro["NOMBRE"]); 
+            $persona->setApellido($registro["APELLIDO"]);
+            $persona->setFecha_nac($registro["FECHA_NAC"]); 
+            $persona->setSexo($registro["SEXO"]); 
+            $persona->setDireccion($registro["DIRECCION"]); 
+            $persona->setTelefono($registro["TELEFONO"]); 
+            $persona->setValor_consulta($registro["VALOR_CONSULTA"]); 
+            $persona->setFecha_contrato($registro["FECHA_CONTRATO"]); 
+            $persona->setId_perfil($registro["ID_PERFIL"]); 
         }
         
         return $persona;

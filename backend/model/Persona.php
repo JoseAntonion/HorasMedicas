@@ -13,7 +13,7 @@ class Persona {
     private $telefono;
     private $valor_consulta;
     private $fecha_contrato;
-    private $id_perfi;
+    private $id_perfil;
     
     public function __construct() {
         

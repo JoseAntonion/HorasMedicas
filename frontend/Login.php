@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($exito) {
             $estiloError = "";
             $error = "";
-            header("location:menuPrincipal.php");
+            header("location:MenuPrincipal.php");
             return;
         } else {
             $estiloError = "alert alert-danger";
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
 
-                    <form class="form-signin" action="login.php" method="POST">
+                    <form class="form-signin" action="Login.php" method="POST">
                         <h2 class="form-signin-heading">Iniciar Sesión</h2>
                         <label for="inputEmail" class="sr-only">Rut</label>
                         <input type="text" id="txtUsuario" name="txtUsuario" class="form-control" placeholder="Rut" required autofocus>
@@ -70,9 +70,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="col-md-4"></div>
             </div>
-                
+
             <br/>
-            
+
             <div class="row">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
@@ -84,9 +84,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="col-md-4"></div>
 
         </div>
-
-        
-
 
     </body>
 </html>

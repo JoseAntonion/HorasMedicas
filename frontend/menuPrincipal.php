@@ -4,22 +4,32 @@ $usuarioLogeado = "";
 $opcionesMenu = "";
 if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
     $usuarioLogeado = $_SESSION["nombre"] . ' ' . $_SESSION["apellido"];
-    if($_SESSION["id_perfil"] == '1'){
-        $opcionesMenu = '<li><a href="#">Perfil 1 Opcion1</a></li>';
-        $opcionesMenu = $opcionesMenu.'<li><a href="#">Perfil 1 Opcion2</a></li>';
-        $opcionesMenu = $opcionesMenu.'<li><a href="#">Perfil 1 Opcion3</a></li>';               
+    if($_SESSION["id_perfil"] == '1'){ // PACIENTE
+        $opcionesMenu = '<li><a href="#">LISTAR ATENCIONES</a></li>';
     }
     
-    if($_SESSION["id_perfil"] == '2'){
-        $opcionesMenu = '<li><a href="#">Perfil 2 Opcion1</a></li>';
-        $opcionesMenu = $opcionesMenu.'<li><a href="#">Perfil 2 Opcion2</a></li>';
-        $opcionesMenu = $opcionesMenu.'<li><a href="#">Perfil 2 Opcion3</a></li>';              
+    if($_SESSION["id_perfil"] == '2'){ // DOCTOR
+        $opcionesMenu = '<li><a href="#">MEDICO NO TIENE OPCIONES</a></li>';
     }
     
-    if($_SESSION["id_perfil"] == '3'){
-        $opcionesMenu = '<li><a href="#">Perfil 3 Opcion1</a></li>';
-        $opcionesMenu = $opcionesMenu.'<li><a href="#">Perfil 3 Opcion2</a></li>';
-        $opcionesMenu = $opcionesMenu.'<li><a href="#">Perfil 3 Opcion3</a></li>';              
+    if($_SESSION["id_perfil"] == '3'){ // SECRETARIA
+        $opcionesMenu = '<li><a href="#">MANTENEDOR PACIENTES/a></li>';
+        $opcionesMenu = $opcionesMenu.'<li><a href="#">MANTENEDOR MEDICOS</a></li>';
+        $opcionesMenu = $opcionesMenu.'<li><a href="#">MANTENEDOR ATENCIONES</a></li>';              
+    }
+    
+    if($_SESSION["id_perfil"] == '4'){ // DIRECTOR
+        $opcionesMenu = '<li><a href="#">MANTENEDOR PACIENTES</a></li>';
+        $opcionesMenu = $opcionesMenu.'<li><a href="#">MANTENEDOR MEDICOS</a></li>';
+        $opcionesMenu = $opcionesMenu.'<li><a href="#">MANTENEDOR ATENCIONES</a></li>';
+        $opcionesMenu = $opcionesMenu.'<li><a href="#">ESTADISTICAS</a></li>'; 
+    }
+    
+    if($_SESSION["id_perfil"] == '5'){ // ADMINISTRADOR
+        $opcionesMenu = '<li><a href="#">MANTENEDOR PACIENTES/a></li>';
+        $opcionesMenu = $opcionesMenu.'<li><a href="#">MANTENEDOR MEDICOS</a></li>';
+        $opcionesMenu = $opcionesMenu.'<li><a href="#">MANTENEDOR SECRETARIAS / DIRECTORES</a></li>';
+        
     }
     
     
@@ -73,7 +83,7 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand">Sentro de Salud Municipal</a>
+                    <a class="navbar-brand">Centro de Salud Municipal</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-left">
@@ -89,7 +99,7 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-3 col-md-2 sidebar">
+<!--                <div class="col-sm-3 col-md-2 sidebar">
 
                     <ul class="nav nav-sidebar">
                         <li><a href="#"></a></li>
@@ -104,8 +114,9 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
                         <li><a href="#">SELECT</a></li>
                     </ul>
 
-                </div>
+                </div>-->
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                    <p>&nbsp;</p>
                     <h1 class="page-header">Dashboard</h1>
 
                     <div class="row placeholders">

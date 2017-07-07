@@ -27,7 +27,7 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <title>Hospital Municipal</title>
-        
+
 
         <!-- Bootstrap core CSS -->
         <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
@@ -49,27 +49,24 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"><a href="logout.php" >logout</a></span>
-                        <span class="icon-bar"><a href="logout.php" >logout</a></span>
-                        <span class="icon-bar"><a href="logout.php" >logout</a></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Bienvenido</a>
+                    <a class="navbar-brand">Sentro de Salud Municipal</a>
                 </div>
-
                 <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a ><?php echo $usuarioLogeado ?></a></li>
-                        <li><a class="glyphicon glyphicon-log-out" href="logout.php"> LogOut</a></li>
-                    </ul>
-                </div>
-
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Antenciones</a></li>
+                    <ul class="nav navbar-nav navbar-left">
+                        <li><a href="#"></a></li>
                         <li><a href="#">Pacientes</a></li>
                         <li><a href="#">Medicos</a></li>
                         <li><a href="#">Usuarios</a></li>
                         <li><a href="#">Estadisticas</a></li>
+                        <li><a href="#">Atenciones</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a>Sr(a) <?php echo $usuarioLogeado ?></a></li>
+                        <li><a href="logout.php" ><span class="glyphicon glyphicon-log-out"></span></a></li>
                     </ul>
                 </div>
             </div>
@@ -77,22 +74,7 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-3 col-md-2 sidebar">
 
-                    <ul class="nav nav-sidebar">
-                        <li><a href="#"></a></li>
-                        <li><a href="#"></a></li>
-                        <li><a href="#"></a></li>
-                        <li><a href="#"></a></li>
-                        <li><a href="#"></a></li>
-                        <li><a href="#"></a></li>
-                        <li class="active"><a href="#">INSERT <span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">DELETE</a></li>
-                        <li><a href="#">UPDATE</a></li>
-                        <li><a href="#">SELECT</a></li>
-                    </ul>
-
-                </div>
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                     <h1 class="page-header">Dashboard</h1>
 

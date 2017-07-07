@@ -1,8 +1,28 @@
 <?php
 session_start();
 $usuarioLogeado = "";
+$opcionesMenu = "";
 if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
     $usuarioLogeado = $_SESSION["nombre"] . ' ' . $_SESSION["apellido"];
+    if($_SESSION["id_perfil"] == '1'){
+        $opcionesMenu = '<li><a href="#">Perfil 1 Opcion1</a></li>';
+        $opcionesMenu = $opcionesMenu.'<li><a href="#">Perfil 1 Opcion2</a></li>';
+        $opcionesMenu = $opcionesMenu.'<li><a href="#">Perfil 1 Opcion3</a></li>';               
+    }
+    
+    if($_SESSION["id_perfil"] == '2'){
+        $opcionesMenu = '<li><a href="#">Perfil 2 Opcion1</a></li>';
+        $opcionesMenu = $opcionesMenu.'<li><a href="#">Perfil 2 Opcion2</a></li>';
+        $opcionesMenu = $opcionesMenu.'<li><a href="#">Perfil 2 Opcion3</a></li>';              
+    }
+    
+    if($_SESSION["id_perfil"] == '3'){
+        $opcionesMenu = '<li><a href="#">Perfil 3 Opcion1</a></li>';
+        $opcionesMenu = $opcionesMenu.'<li><a href="#">Perfil 3 Opcion2</a></li>';
+        $opcionesMenu = $opcionesMenu.'<li><a href="#">Perfil 3 Opcion3</a></li>';              
+    }
+    
+    
 }
 ?>
 <!DOCTYPE html>
@@ -65,11 +85,7 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
 
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Antenciones</a></li>
-                        <li><a href="#">Pacientes</a></li>
-                        <li><a href="#">Medicos</a></li>
-                        <li><a href="#">Usuarios</a></li>
-                        <li><a href="#">Estadisticas</a></li>
+                        <?php echo $opcionesMenu ?>
                     </ul>
                 </div>
             </div>

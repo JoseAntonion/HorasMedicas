@@ -21,4 +21,6 @@ interface GenericDAO {
     public function listarTodos();
     
     public function buscarPorId($idRegistro);
+    
+    public function listarPorParametro($idRegistro);
 }

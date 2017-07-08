@@ -17,13 +17,13 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
     }
     
     if($_SESSION["id_perfil"] == '3'){ // SECRETARIA
-        $opcionesMenu = '<li><a href="'.$mantPacientes.'">PACIENTES/a></li>';
+        $opcionesMenu = '<li><a href="'.$mantPacientes.'">PACIENTES</a></li>';
         $opcionesMenu = $opcionesMenu.'<li><a href="'.$mantMedicos.'">MEDICOS</a></li>';
         $opcionesMenu = $opcionesMenu.'<li><a href="'.$mantAtenciones.'">ATENCIONES</a></li>';              
     }
     
     if($_SESSION["id_perfil"] == '4'){ // DIRECTOR
-        $opcionesMenu = '<li><a href="'.$mantPacientes.'">PACIENTES/a></li>';
+        $opcionesMenu = '<li><a href="'.$mantPacientes.'">PACIENTES</a></li>';
         $opcionesMenu = $opcionesMenu.'<li><a href="'.$mantMedicos.'">MEDICOS</a></li>';
         $opcionesMenu = $opcionesMenu.'<li><a href="'.$mantAtenciones.'">ATENCIONES</a></li>';
         $opcionesMenu = $opcionesMenu.'<li><a href="'.$estadisticas.'">ESTADISTICAS</a></li>'; 

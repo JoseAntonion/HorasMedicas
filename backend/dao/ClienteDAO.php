@@ -65,4 +65,8 @@ class ClienteDAO implements GenericDAO {
         
     }
 
+    public function listarPorParametro($idRegistro) {
+        
+    }
+
 }

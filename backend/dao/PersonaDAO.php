@@ -100,4 +100,8 @@ class PersonaDAO implements GenericDAO {
         return $listado;
     }
 
+    public function listarPorParametro($idRegistro) {
+        
+    }
+
 }

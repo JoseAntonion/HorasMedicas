@@ -28,7 +28,7 @@ jQuery(document).ready(function () {
             var rutSinFormato = jQuery.Rut.quitarFormato(this.value);
             var mantisa = rutSinFormato.slice(0, rutSinFormato.length - 1);
 
-            mostrarImagenCargando();
+            //mostrarImagenCargando();
             jQuery.getJSON("/HorasMedicas/backend/info-cliente2.php", {id: mantisa}, function (resul) {
 
                 jQuery("input[name='nombre']").val(resul.nombre);
@@ -44,7 +44,7 @@ jQuery(document).ready(function () {
 //                            jQuery("select[name='beneficiario']").append("<option value=\"" + beneficiario.id + "\">" + beneficiario.nombre + " " + beneficiario.apellido + "</option>");
 //                        });
 
-                ocultarImagenCargando();
+                //ocultarImagenCargando();
 
             });
 

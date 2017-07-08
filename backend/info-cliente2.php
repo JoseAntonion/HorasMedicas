@@ -1,12 +1,12 @@
 <?php
 
 
-include __DIR__ ."/controller/ClienteControlador.php";
+include __DIR__ ."/controller/PersonaController.php";
 
 
-    if($_SERVER["REQUEST_METHOD"]=="GET") {
-        if(isset($_GET["id"])) {
-            $json = ClienteControlador::getInfoCliente($_GET["id"]);
+    if($_SERVER["REQUEST_METHOD"]=="POST") {
+        if(isset($_POST["id"])) {
+            $json = PersonaController::getInfoCliente($_POST["id"]);
             echo $json;
         } else {
             echo "{\"error\": \"solictud incorrecta, no se ha enviado el parámetro 'id' del cliente\"";

@@ -6,6 +6,11 @@ include_once __DIR__."/../model/Persona.php";
 
 class PersonaDAO implements GenericDAO {
     
+    /**
+     *
+     * @var PDO 
+     */
+    
     private $conexion;
     
     public function __construct($conexion) {
@@ -45,10 +50,9 @@ class PersonaDAO implements GenericDAO {
     public function buscarPorId($idRegistro) {
         $persona = null;
         
-        $sentencia = $this->conexion->prepare("SELECT RUT, CONTRASENA, NOMBRE, APELLIDO, FECHA_NAC, SEXO, DIRECCION, TELEFONO, VALOR_CONSULTA, FECHA_CONTRATO, ID_PERFIL FROM PERSONA WHERE RUT = :p_rut");
+        $sentencia = $this->conexion->prepare("SELECT * FROM PERSONA WHERE RUT = :p_rut");
         
-        $p_rut = $idRegistro;
-        $sentencia->bindParam(':p_rut', $p_rut);
+        $sentencia->bindParam(':p_rut', $idRegistro);
         
         $sentencia->execute();
 

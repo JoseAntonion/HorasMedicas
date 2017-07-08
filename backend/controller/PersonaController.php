@@ -55,4 +55,17 @@ class PersonaController {
         
         return false;
     }
+    
+    public static function getInfoCliente($idCliente) {
+        
+        $conexion = DBConnection::getConexion();
+        $personaDAO = new PersonaDAO($conexion);
+        
+        return json_encode($personaDAO->buscarPorId($idCliente));
+        //json_encode transforma la respuesta de la llamada al metodo buscarPorId a un objeto json
+        
+     
+        //return json_encode($cliente->jsonSerialize());
+    }
+    
 }

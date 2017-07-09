@@ -1,54 +1,38 @@
 
 jQuery(document).ready(function () {
 
-    /*
     jQuery.ajaxSetup({
-        "error": function (respuesta, jqXHR, errorMsg) {
-            ocultarImagenCargando();
-            alert("ha ocurrido el siguiente error: " + errorMsg);
+        "error":function(respuesta, jqXHR, errorMsg) {            
+            ocultarImagenCargando();  
+            alert("ha ocurrido el siguiente error: "+errorMsg);
         }
     });
-    */
-
-
 
 
     /**
      * Manejo del campo RUT
      */
-    //jQuery("input[name='txtRut']").Rut({format_on: 'keyup'});
+    
+    //jQuery("input[name='txtRut']").Rut({format_on:'keyup'});
     jQuery("input[name='txtRut']").blur(function () {
         if (this.value !== "") {
-            /*
-            if (!validarRut()) {
-                jQuery(this).addClass("error");
-                return;
-            } else {
-                jQuery(this).removeClass("error");
-            }
-            */
             
-            //var rutSinFormato = jQuery.Rut.quitarFormato(this.value);
-            //var mantisa = rutSinFormato.slice(0, rutSinFormato.length - 1);
+            
+            
+            
+            
          
 
             //mostrarImagenCargando();
             jQuery.getJSON("/HorasMedicas/backend/info-cliente2.php", {id: this.value}, function (resul) {
 
                 jQuery("input[name='txtNombre']").val(resul.nombre);
-                //jQuery("input[name='txtNombre']").attr("readonly", true);
-
                 jQuery("input[name='txtApellido']").val(resul.apellido);
-                //jQuery("input[name='txtApellido']").attr("readonly", true);
-
-//                        jQuery("select[name='beneficiario'] option").remove();
-//                        jQuery("select[name='beneficiario']").append("<option value=\"\">-- Seleccione el beneficiario --</option>");
-//
-//                        jQuery.each(titular.beneficiarios, function (indice, beneficiario) {
-//                            jQuery("select[name='beneficiario']").append("<option value=\"" + beneficiario.id + "\">" + beneficiario.nombre + " " + beneficiario.apellido + "</option>");
-//                        });
-
-                //ocultarImagenCargando();
+                jQuery("input[name='dpFecha']").val(resul.fecha_nac);
+                jQuery("input[name='txtDireccion']").val(resul.direccion);
+                jQuery("select[name='cboSexo']").val(resul.sexo);
+                //jQuery("select[name='cboSexo']").append("<option value=\"" + beneficiario.id + "\">" + beneficiario.nombre + " " + beneficiario.apellido + "</option>")
+                
 
             });
 

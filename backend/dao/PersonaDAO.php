@@ -122,6 +122,36 @@ class PersonaDAO implements GenericDAO {
         return $persona;
     }
 
+    public function BuscarPorIdJSON($idRegistro) {
+        
+        $persona = null;
+        
+        $sentencia = $this->conexion->prepare("SELECT * FROM PERSONA WHERE RUT = :p_rut");
+        
+        $sentencia->bindParam(':p_rut', $idRegistro);
+        
+        $sentencia->execute();
+
+        
+        while($registro = $sentencia->fetch()) {            
+            $persona = new Persona();
+            $persona->setRut($registro["RUT"]);            
+            $persona->setContrasena($registro["CONTRASENA"]);
+            $persona->setNombre($registro["NOMBRE"]); 
+            $persona->setApellido($registro["APELLIDO"]);
+            $persona->setFecha_nac($registro["FECHA_NAC"]); 
+            $persona->setSexo($registro["SEXO"]); 
+            $persona->setDireccion($registro["DIRECCION"]); 
+            $persona->setTelefono($registro["TELEFONO"]); 
+            $persona->setValor_consulta($registro["VALOR_CONSULTA"]); 
+            $persona->setFecha_contrato($registro["FECHA_CONTRATO"]); 
+            $persona->setId_perfil($registro["ID_PERFIL"]); 
+        }
+        
+        return json_encode($persona->jsonSerialize());
+        
+    }
+    
     public function BuscarPorId($idRegistro) {
         
         $persona = null;
@@ -151,5 +181,6 @@ class PersonaDAO implements GenericDAO {
         return $persona;
         
     }
+
 
 }

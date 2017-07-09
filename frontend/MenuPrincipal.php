@@ -50,29 +50,21 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <link href="/HorasMedicas/frontend/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/HorasMedicas/frontend/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/HorasMedicas/frontend/css/bootstrap-theme.css" rel="stylesheet">
-        <link href="/HorasMedicas/frontend/css/bootstrap-theme.min.css" rel="stylesheet">
-        <link href="/HorasMedicas/frontend/css/bootstrap.css" rel="stylesheet">
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="icon" href="../../favicon.ico">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-theme.css" rel="stylesheet">
+        <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link rel="icon" href="/../HorasMedicas/Hospital.ico">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script src="js/holder.min.js"></script>
         <title>Hospital Municipal</title>
-        
-
-        <!-- Bootstrap core CSS -->
-        <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
-        <link href="dashboard.css" rel="stylesheet">
+        <link href="css/dashboard.css" rel="stylesheet">
 
-        <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
 
     </head>
 
@@ -107,10 +99,9 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-        <script src="../../dist/js/bootstrap.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
         <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-        <script src="../../assets/js/vendor/holder.min.js"></script>
-        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+        <script src="js/holder.min.js"></script>
+
     </body>
 </html>

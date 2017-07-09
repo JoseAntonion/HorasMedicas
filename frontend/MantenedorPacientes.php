@@ -3,16 +3,11 @@ session_start();
 include_once __DIR__ . "/../backend/controller/PersonaController.php";
 $usuarioLogeado = "";
 $opcionesMenu = "";
-$buscaPersona= new Persona();
+$buscaPersona = new Persona();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if (isset($_POST["txtRut"])) {          
-            $buscaPersona = PersonaController::BuscarPorId($_POST["txtRut"]);
-        }
-    }
 
 if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
-    $listaPersonas = PersonaController::ListarTodo();
+    $listaPersonas = PersonaController::ListarPersonasPorPerfil($_SESSION["id_perfil"]);
     $usuarioLogeado = $_SESSION["nombre"] . ' ' . $_SESSION["apellido"];
     $mantPacientes = 'MantenedorPacientes.php';
     $mantMedicos = 'MantenedorMedicos.php';
@@ -20,9 +15,10 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
     $mantSecretarias = 'MantenedorSecretarias.php';
     $mantDirectores = 'MantenedorDirectores.php';
     $estadisticas = 'Estadisticas.php';
-    
-    
 
+    
+    
+    
     if ($_SESSION["id_perfil"] == '1') { // PACIENTE
         $opcionesMenu = '<li><a href="' . $mantAtenciones . '">ATENCIONES</a></li>';
     }
@@ -52,39 +48,27 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
 <html lang="en">
     <head>
 
-        <script type="text/javascript" src="js/jquery.Rut.js"></script>
-        <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
-        <script type="text/javascript" src="js/MantenedorPacientes.js" ></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <link href="/HorasMedicas/frontend/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/HorasMedicas/frontend/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/HorasMedicas/frontend/css/bootstrap-theme.css" rel="stylesheet">
-        <link href="/HorasMedicas/frontend/css/bootstrap-theme.min.css" rel="stylesheet">
-        <link href="/HorasMedicas/frontend/css/bootstrap.css" rel="stylesheet">
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="icon" href="../../favicon.ico">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-theme.css" rel="stylesheet">
+        <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="css/bootstrap.css" rel="stylesheet">
 
+        <script src="js/jquery-3.2.1.js"></script>
+        <script src="js/jquery.Rut.js"></script>
+        <script src="js/MantenedorPacientes.js" ></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/holder.min.js"></script>
         <title>Hospital Municipal</title>
 
-        <!-- Bootstrap core CSS -->
-        <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
         <!-- Custom styles for this template -->
-        <link href="dashboard.css" rel="stylesheet">
-
-        <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-
+        <link href="css/dashboard.css" rel="stylesheet">
     </head>
 
     <body>
@@ -120,7 +104,7 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <form method="POST" action="MantenedorPacientes.php">
+                <form action="#" method="POST">
                     <div class="form-group row">
                         <label for="example-text-input" class="col-2 col-form-label">Rut</label>
                         <div class="col-8">
@@ -134,7 +118,7 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
                         <label for="example-search-input" class="col-2 col-form-label">Nombre</label>
                         <div class="col-8">
                             <input class="form-control" type="text" 
-                                   value="<?php echo $buscaPersona->getNombre() ?>" 
+                                   value="" 
                                    id="txtNombre"
                                    name="txtNombre">
                         </div>
@@ -143,7 +127,7 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
                         <label for="example-email-input" class="col-2 col-form-label">Apellido</label>
                         <div class="col-8">
                             <input class="form-control" type="text" 
-                                   value="<?php echo $buscaPersona->getApellido() ?>" 
+                                   value="" 
                                    id="txtApellido"
                                    name="txtApellido">
                         </div>
@@ -151,13 +135,19 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
                     <div class="form-group row">
                         <label for="example-date-input" class="col-2 col-form-label">Fecha de Nacimiento</label>
                         <div class="col-8">
-                            <input class="form-control" type="date" value="<?php echo $buscaPersona->getFecha_nac() ?>" id="dpFecha">
+                            <input class="form-control" type="date" 
+                                   value="" 
+                                   id="dpFecha"
+                                   name="dpFecha">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="example-url-input" class="col-2 col-form-label">Direccion</label>
                         <div class="col-8">
-                            <input class="form-control" type="text" value="<?php echo $buscaPersona->getDireccion() ?>" id="txtDireccion">
+                            <input class="form-control" type="text"
+                                   value="" 
+                                   id="txtDireccion"
+                                   name="txtDireccion">
                         </div>
                     </div>
 
@@ -166,8 +156,8 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
                         <div class="col-5 selectContainer">
                             <select class="form-control" name="cboSexo">
                                 <option value="">Seleccione Sexo</option>
-                                <option value="f">Femenino</option>
-                                <option value="m">Masculino</option>
+                                <option value="FEMENINO">Femenino</option>
+                                <option value="MASCULINO">Masculino</option>
 
                             </select>
                         </div>
@@ -226,19 +216,6 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
             <div class="col-md-2"></div>
         </div>
 
-
-
-
-        <!-- Bootstrap core JavaScript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-                        <script > window . jQuery || document . write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-                            <script src="../../dist/js/bootstrap.min.js"></script>
-                            <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-                            <script src="../../assets/js/vendor/holder.min.js"></script>
-                            <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-                            <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-                            </body>
-                            </html>
+    </body>
+</html>
 

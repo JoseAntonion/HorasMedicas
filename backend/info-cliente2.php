@@ -4,9 +4,9 @@
 include __DIR__ ."/controller/PersonaController.php";
 
 
-    if($_SERVER["REQUEST_METHOD"]=="POST") {
-        if(isset($_POST["id"])) {
-            $json = PersonaController::BuscarPorId($_POST["id"]);
+    if($_SERVER["REQUEST_METHOD"]=="GET") {
+        if(isset($_GET["id"])) {
+            $json = PersonaController::BuscarPorIdJSON($_GET["id"]);
             echo $json;
         } else {
             echo "{\"error\": \"solictud incorrecta, no se ha enviado el parámetro 'id' del cliente\"";

@@ -11,7 +11,7 @@ class PersonaController {
         $conexion = DBConnection::getConexion();
         $daoPersona= new PersonaDAO($conexion);
         
-        $persona = $daoPersona->buscarPorId($rut);
+        $persona = $daoPersona->BuscarPorId($rut);
         
         if($persona == null)  {
             return false;
@@ -70,7 +70,15 @@ class PersonaController {
         $personaDAO = new PersonaDAO($conexion);
         
         //return $personaDAO->buscarPorId($idCliente);
-        return json_encode($personaDAO->buscarPorId($idCliente));
+        return $personaDAO->BuscarPorId($idCliente);
+    }
+    
+    public static function BuscarPorIdJSON($idCliente){
+        $conexion = DBConnection::getConexion();
+        $personaDAO = new PersonaDAO($conexion);
+        
+        //return $personaDAO->buscarPorId($idCliente);
+        return $personaDAO->BuscarPorIdJSON($idCliente);
     }
  
     public static function ListarTodo(){

@@ -4,6 +4,8 @@ $usuarioLogeado = "";
 $opcionesMenu = "";
 if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
     
+    $muestraAtenciones = 'MuestraAtenciones.php';
+    
     $usuarioLogeado = $_SESSION["nombre"] . ' ' . $_SESSION["apellido"];
     $mantPacientes = 'MantenedorPacientes.php';
     $mantMedicos = 'MantenedorMedicos.php';
@@ -11,9 +13,9 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
     $mantSecretarias = 'MantenedorSecretarias.php';
     $mantDirectores = 'MantenedorDirectores.php';
     $estadisticas = 'Estadisticas.php';
-    
+
     if($_SESSION["id_perfil"] == '1'){ // PACIENTE
-        $opcionesMenu = '<li><a href="'.$mantAtenciones.'">ATENCIONES</a></li>';
+        $opcionesMenu = '<li><a href="'.$muestraAtenciones.'">ATENCIONES</a></li>';
     }
     
     if($_SESSION["id_perfil"] == '3'){ // SECRETARIA

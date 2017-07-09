@@ -206,7 +206,7 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
                     <div class="btn-group btn-group-justified">
                         <a href="#" class="btn btn-primary" type="submit" id="btnAgregar">Agregar</a>
                         <a href="#" class="btn btn-primary" type="submit" id="btnEliminar">Eliminar</a>
-                        <a href="#" class="btn btn-primary" type="submit" id="btnEliminar">Modificar</a>
+                        <a href="#" class="btn btn-primary" type="submit" id="btnModificar">Modificar</a>
                         <a href="#" class="btn btn-primary" type="submit" id="btnBuscar">Buscar</a>
                         <a href="#" class="btn btn-primary" type="reset" id="btnLimpiar">Limpiar</a>
                     </div>

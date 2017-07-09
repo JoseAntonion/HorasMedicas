@@ -1,6 +1,6 @@
 <?php
 
-include_once __DIR__."/../dao/ConexionDB.php";
+include_once __DIR__."/../dao/DBConnection.php";
 include_once __DIR__."/../dao/AtencionDAO.php";
 
 /**
@@ -24,13 +24,13 @@ class AtencionController {
         return $daoAtencion->listarPorParametro($rut);
     }
     
-    public static function agregarAtencion($id_atencion, $fecha_atencion, $hora_atencion,
+    public static function agregarAtencion($fecha_atencion, $hora_atencion,
                                             $estado, $rut_paciente, $rut_medico) {
         
         // validar que los datos sean válidos
         $atencion = new Atencion();
         
-        $atencion->setId_atencion($id_atencion);
+        //$atencion->setId_atencion($id_atencion);
         $atencion->setFecha_atencion($fecha_atencion);
         $atencion->setHora_atencion($hora_atencion);
         $atencion->setEstado($estado);

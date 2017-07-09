@@ -38,22 +38,24 @@ class PersonaDAO implements GenericDAO {
         return $sentencia->execute();
     }
 
-    public function agregar($registro) {
-        /*@var $registro Persona */
+    public function agregar($rut,$pass,$nombre,$apellido,$fecha_nac,$sexo,$direccion,$telefono,$id) {
+        
 
-        $query = "INSERT INTO persona (RUT,NOMBRE,APELLIDO,FECHA_NAC,"
-                . " SEXO, DIRECCION, TELEFONO) "
-                . "VALUES (:RUT,:NOMBRE,APELLIDO,:FECHA_NAC,:SEXO,:DIRECCION,:TELEFONO) ";
+        $query = "INSERT INTO persona (RUT,CONTRASENA,NOMBRE,APELLIDO,FECHA_NAC,"
+                . " SEXO, DIRECCION, TELEFONO,ID_PERFIL) "
+                . "VALUES (:RUT,:CONTRASENA,:NOMBRE,APELLIDO,:FECHA_NAC,:SEXO,:DIRECCION,:TELEFONO,:ID) ";
         
         $sentencia = $this->conexion->prepare($query);
 
-        $sentencia->bindParam(':RUT', $registro->getRut());
-        $sentencia->bindParam(':NOMBRE', $registro->getNombre());
-        $sentencia->bindParam(':APELLIDO', $registro->getApellido());
-        $sentencia->bindParam(':FECHA_NAC', $registro->getFecha_nac());
-        $sentencia->bindParam(':SEXO', $registro->getSexo());
-        $sentencia->bindParam(':DIRECCION', $registro->getDireccion());
-        $sentencia->bindParam(':TELEFONO', $registro->getTelefono());
+        $sentencia->bindParam(':RUT', $rut);
+        $sentencia->bindParam(':CONTRASENA', $pass);
+        $sentencia->bindParam(':NOMBRE', $nombre);
+        $sentencia->bindParam(':APELLIDO', $apellido);
+        $sentencia->bindParam(':FECHA_NAC', $fecha_nac);
+        $sentencia->bindParam(':SEXO', $sexo);
+        $sentencia->bindParam(':DIRECCION', $direccion);
+        $sentencia->bindParam(':TELEFONO', $telefono);
+        $sentencia->bindParam(':ID', $id);
               
         return $sentencia->execute();
 

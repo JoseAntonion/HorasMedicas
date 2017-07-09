@@ -12,7 +12,7 @@
  */
 interface GenericDAO {
     
-    public function agregar($registro);
+    public function agregar($rut,$pass,$nombre,$apellido,$fecha_nac,$sexo,$direccion,$telefono,$id);
     
     public function actualizar($registro);
     

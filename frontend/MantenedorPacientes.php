@@ -4,6 +4,8 @@ include_once __DIR__ . "/../backend/controller/PersonaController.php";
 $usuarioLogeado = "";
 $opcionesMenu = "";
 $buscaPersona = new Persona();
+$mensaje = "";
+$clase = "";
 
 
 if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
@@ -16,9 +18,9 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
     $mantDirectores = 'MantenedorDirectores.php';
     $estadisticas = 'Estadisticas.php';
 
-    
-    
-    
+
+
+
     if ($_SESSION["id_perfil"] == '1') { // PACIENTE
         $opcionesMenu = '<li><a href="' . $mantAtenciones . '">ATENCIONES</a></li>';
     }
@@ -102,6 +104,18 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
         <br/>
         <br/>
 
+
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="<? echo $clase ?>" role="alert" style="text-align: center" id="mensaje">
+                    <? echo $mensaje ?>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+
+
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
@@ -160,6 +174,16 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
                                    value="" 
                                    id="txtDireccion"
                                    name="txtDireccion">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="example-url-input" class="col-2 col-form-label">Teléfono</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text"
+                                   value="" 
+                                   id="txtFono"
+                                   name="txtFono">
                         </div>
                     </div>
 

@@ -33,7 +33,7 @@ jQuery(document).ready(function () {
         if (rut !== "") {
 
             mostrarImagenCargando();
-            jQuery.getJSON("/HorasMedicas/backend/info-cliente2.php", {id: rut}, function (resul) {
+            jQuery.getJSON("/HorasMedicas/backend/info-cliente2.php", {id: rut,opcion: 1}, function (resul) {
 
                 jQuery("input[name='txtContrasena']").val(resul.contrasena);
                 jQuery("input[name='txtNombre']").val(resul.nombre);
@@ -42,8 +42,7 @@ jQuery(document).ready(function () {
                 jQuery("input[name='txtDireccion']").val(resul.direccion);
                 jQuery("select[name='cboSexo']").val(resul.sexo);
 
-                ocultarImagenCargando()
-
+                ocultarImagenCargando();
             });
 
         }
@@ -51,19 +50,27 @@ jQuery(document).ready(function () {
 
     jQuery("#btnAgregar").click(function () {
         var rut = $("input[name='txtRut']").val();
-        if (rut !== "") {
+        var pass = $("input[name='txtContrasena']").val();
+        var nombre = $("input[name='txtNombre']").val();
+        var apellido = $("input[name='txtApellido']").val();
+        var fecha_nac = $("#dpFecha").val();
+        var direccion = $("input[name='txtDireccion']").val();
+        var sexo = $("select[name='cboSexo']").val();
+        var fono = $("input[name='txtFono']").val();
+        if (rut !== "" && pass !== "" && nombre !== "" && apellido !== "" && fecha_nac !== "" &&
+                direccion !== "" && sexo !== "") {
 
-            mostrarImagenCargando();
-            jQuery.getJSON("/HorasMedicas/backend/info-cliente2.php", {id: rut}, function (resul) {
-
-                jQuery("input[name='txtNombre']").val(resul.nombre);
-                jQuery("input[name='txtApellido']").val(resul.apellido);
-                jQuery("input[name='dpFecha']").val(resul.fecha_nac);
-                jQuery("input[name='txtDireccion']").val(resul.direccion);
-                jQuery("select[name='cboSexo']").val(resul.sexo);
-
-                ocultarImagenCargando()
-
+            jQuery.getJSON("/HorasMedicas/backend/info-cliente2.php",
+            {rut: rut,pass:pass,nombre:nombre,apellido:apellido,
+                fecha_nac:fecha_nac,direccion:direccion,sexo:sexo,
+                fono:fono,id:1,opcion:2}, 
+            function (resul) {
+                if(resul){
+                    jQuery("#mensaje").val("Paciente Agregado Correctamente");
+                    jQuery("#mensaje").addClass("alert alert-success");
+                }else{
+                    
+                }
             });
 
         }

@@ -44,11 +44,11 @@ class PersonaController {
         
     }
 
-    public static function AgregarPersona($persona){
+    public static function AgregarPersona($rut,$pass,$nombre,$apellido,$fecha_nac,$direccion,$sexo,$fono,$id){
         $conexion = DBConnection::getConexion();
         $personaDAO = new PersonaDAO($conexion);
         
-        return $personaDAO->agregar($persona);
+        return $personaDAO->agregar($rut, $pass, $nombre, $apellido, $fecha_nac, $sexo, $direccion, $fono, $id);
     }
     
     public static function ModificarPersona($persona){

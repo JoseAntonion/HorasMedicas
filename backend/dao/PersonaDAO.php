@@ -43,7 +43,7 @@ class PersonaDAO implements GenericDAO {
 
         $query = "INSERT INTO persona (RUT,CONTRASENA,NOMBRE,APELLIDO,FECHA_NAC,"
                 . " SEXO, DIRECCION, TELEFONO,ID_PERFIL) "
-                . "VALUES (:RUT,:CONTRASENA,:NOMBRE,APELLIDO,:FECHA_NAC,:SEXO,:DIRECCION,:TELEFONO,:ID) ";
+                . "VALUES (:RUT, :CONTRASENA, :NOMBRE, :APELLIDO, :FECHA_NAC, :SEXO, :DIRECCION, :TELEFONO, :ID) ";
         
         $sentencia = $this->conexion->prepare($query);
 

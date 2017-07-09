@@ -21,20 +21,16 @@ class Persona {
     
     public function getRut() {
         return $this->rut;
-    }
-    
+    }    
     public function getContrasena() {
         return $this->contrasena;
-    }
-    
+    }    
     public function getNombre() {
         return $this->nombre;
     }
-
     public function getApellido() {
         return $this->apellido;
-    }
-    
+    } 
     public function getFecha_nac() {
         return $this->fecha_nac;
     }

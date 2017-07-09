@@ -81,17 +81,19 @@ class PersonaDAO implements GenericDAO {
 
     public function listarTodos() {
         $listado = array();
-        
+        $persona = new Persona();
         $registros = $this->conexion->query("SELECT * FROM persona");
         
         if($registros != null) {
             foreach($registros as $fila) {
                 $persona = new Persona();
-                $persona->setRut($fila["rut"]);
-                $persona->setNombre($fila["nombre"]);
-                $persona->setApellido($fila["apellido"]);
-                $persona->setFechaNacimiento($fila["fecha_nacimiento"]);
-                $persona->setEmail($fila["email"]);
+                $persona->setRut($fila["RUT"]);
+                $persona->setNombre($fila["NOMBRE"]);
+                $persona->setApellido($fila["APELLIDO"]);
+                $persona->setFecha_nac($fila["FECHA_NAC"]);
+                $persona->setSexo($fila["SEXO"]);
+                $persona->setDireccion($fila["DIRECCION"]);
+                $persona->setTelefono($fila["TELEFONO"]);
 
                 array_push($listado, $persona);
             }

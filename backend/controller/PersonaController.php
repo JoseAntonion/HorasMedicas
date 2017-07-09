@@ -68,4 +68,20 @@ class PersonaController {
         //return json_encode($cliente->jsonSerialize());
     }
     
+    public static function ListarPersonas(){
+        $conexion = DBConnection::getConexion();
+        $personaDAO = new PersonaDAO($conexion);
+        
+        return $personaDAO->listarTodos();
+        
+    }
+
+    public static function BuscarPorId($idCliente){
+        $conexion = DBConnection::getConexion();
+        $personaDAO = new PersonaDAO($conexion);
+        
+        //return $personaDAO->buscarPorId($idCliente);
+        return json_encode($personaDAO->buscarPorId($idCliente));
+    }
+    
 }

@@ -1,12 +1,14 @@
 
 jQuery(document).ready(function () {
 
+    /*
     jQuery.ajaxSetup({
         "error": function (respuesta, jqXHR, errorMsg) {
             ocultarImagenCargando();
             alert("ha ocurrido el siguiente error: " + errorMsg);
         }
     });
+    */
 
 
 
@@ -14,28 +16,30 @@ jQuery(document).ready(function () {
     /**
      * Manejo del campo RUT
      */
-    jQuery("input[name='rut']").Rut({format_on: 'keyup'});
-    jQuery("input[name='rut']").blur(function () {
+    //jQuery("input[name='txtRut']").Rut({format_on: 'keyup'});
+    jQuery("input[name='txtRut']").blur(function () {
         if (this.value !== "") {
-
+            /*
             if (!validarRut()) {
                 jQuery(this).addClass("error");
                 return;
             } else {
                 jQuery(this).removeClass("error");
             }
-
-            var rutSinFormato = jQuery.Rut.quitarFormato(this.value);
-            var mantisa = rutSinFormato.slice(0, rutSinFormato.length - 1);
+            */
+            
+            //var rutSinFormato = jQuery.Rut.quitarFormato(this.value);
+            //var mantisa = rutSinFormato.slice(0, rutSinFormato.length - 1);
+         
 
             //mostrarImagenCargando();
-            jQuery.getJSON("/HorasMedicas/backend/info-cliente2.php", {id: mantisa}, function (resul) {
+            jQuery.getJSON("/HorasMedicas/backend/info-cliente2.php", {id: this.value}, function (resul) {
 
-                jQuery("input[name='nombre']").val(resul.nombre);
-                jQuery("input[name='nombre']").attr("readonly", true);
+                jQuery("input[name='txtNombre']").val(resul.nombre);
+                //jQuery("input[name='txtNombre']").attr("readonly", true);
 
-                jQuery("input[name='apellido']").val(resul.apellido);
-                jQuery("input[name='apellido']").attr("readonly", true);
+                jQuery("input[name='txtApellido']").val(resul.apellido);
+                //jQuery("input[name='txtApellido']").attr("readonly", true);
 
 //                        jQuery("select[name='beneficiario'] option").remove();
 //                        jQuery("select[name='beneficiario']").append("<option value=\"\">-- Seleccione el beneficiario --</option>");

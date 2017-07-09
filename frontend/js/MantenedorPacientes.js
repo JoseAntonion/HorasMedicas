@@ -20,7 +20,7 @@ jQuery(document).ready(function () {
                 $(this).prev().attr('type', 'password');
                 $(this).removeClass('glyphicon-eye-close').addClass('glyphicon-eye-open').attr('action', 'hide');
             }
-        })
+    })
     
 
 
@@ -48,17 +48,17 @@ jQuery(document).ready(function () {
         }
     });
 
-    jQuery("#btnAgregar").click(function () {
-        var rut = $("input[name='txtRut']").val();
-        var pass = $("input[name='txtContrasena']").val();
-        var nombre = $("input[name='txtNombre']").val();
-        var apellido = $("input[name='txtApellido']").val();
-        var fecha_nac = $("#dpFecha").val();
-        var direccion = $("input[name='txtDireccion']").val();
-        var sexo = $("select[name='cboSexo']").val();
-        var fono = $("input[name='txtFono']").val();
-        if (rut !== "" && pass !== "" && nombre !== "" && apellido !== "" && fecha_nac !== "" &&
-                direccion !== "" && sexo !== "") {
+        jQuery("#btnAgregar").click(function () {
+            var rut = $("input[name='txtRut']").val();
+            var pass = $("input[name='txtContrasena']").val();
+            var nombre = $("input[name='txtNombre']").val();
+            var apellido = $("input[name='txtApellido']").val();
+            var fecha_nac = $("#dpFecha").val();
+            var direccion = $("input[name='txtDireccion']").val();
+            var sexo = $("select[name='cboSexo']").val();
+            var fono = $("input[name='txtFono']").val();
+            if (rut !== "" && pass !== "" && nombre !== "" && apellido !== "" && fecha_nac !== "" &&
+                    direccion !== "" && sexo !== "") {
 
             jQuery.getJSON("/HorasMedicas/backend/info-cliente2.php",
             {rut: rut,pass:pass,nombre:nombre,apellido:apellido,
@@ -73,70 +73,42 @@ jQuery(document).ready(function () {
                 }
             });
 
-        }
+            }
+            });
+            
+            jQuery("#btnModificar").click(function () {
+            var rut = $("input[name='txtRut']").val();
+            var pass = $("input[name='txtContrasena']").val();
+            var nombre = $("input[name='txtNombre']").val();
+            var apellido = $("input[name='txtApellido']").val();
+            var fecha_nac = $("#dpFecha").val();
+            var direccion = $("input[name='txtDireccion']").val();
+            var sexo = $("select[name='cboSexo']").val();
+            var fono = $("input[name='txtFono']").val();
+            if (rut !== "" && pass !== "" && nombre !== "" && apellido !== "" && fecha_nac !== "" &&
+                    direccion !== "" && sexo !== "") {
+
+            jQuery.getJSON("/HorasMedicas/backend/info-cliente2.php",
+            {rut: rut,pass:pass,nombre:nombre,apellido:apellido,
+                fecha_nac:fecha_nac,direccion:direccion,sexo:sexo,
+                fono:fono,id:1,opcion:3}, 
+            function (resul) {
+                if(resul){
+                    jQuery("#mensaje").val("Paciente Modificado Correctamente");
+                    jQuery("#mensaje").addClass("alert alert-success");
+                }else{
+                    
+                }
+            });
+
+            }
+            });        
+            
+
+      
+        
+        
     });
-
-
-    /**
-     * Manejo del campo Regiones
-     */
-//    mostrarImagenCargando();
-//    jQuery.getJSON("https://apis.modernizacion.cl/dpa/regiones", function (regiones) {
-//        jQuery.each(regiones, function (indice, region) {
-//            jQuery("select[name='region']").append("<option value=\"" + region.codigo + "\">" + region.nombre + "</option>");            
-//        });
-//        
-//        ocultarImagenCargando();
-//    });
-
-
-
-    /**
-     * Manejo de provincias
-     */
-//    jQuery("select[name='region']").change(function () {
-//        
-//        mostrarImagenCargando();
-//        jQuery.getJSON("https://apis.modernizacion.cl/dpa/regiones/" + jQuery(this).val() + "/provincias", function (provincias) {
-//
-//            jQuery("select[name='provincia'] option").remove();
-//            jQuery("select[name='provincia']").append("<option value=\"\">-- Seleccione una provincia --</option>");
-//
-//            jQuery("select[name='comuna'] option").remove();
-//            jQuery("select[name='comuna']").append("<option value=\"\">-- Seleccione una comuna --</option>");
-//
-//            jQuery.each(provincias, function (indice, provincia) {
-//                jQuery("select[name='provincia']").append("<option value=\"" + provincia.codigo + "\">" + provincia.nombre + "</option>");                
-//            });
-//            
-//            ocultarImagenCargando();
-//        });
-//    });
-
-
-    /**
-     * Manejo de provincias
-     */
-//    jQuery("select[name='provincia']").change(function () {
-//        var codigoRegion = jQuery("select[name='region']").val();
-//        var codigoProvincia = jQuery(this).val();
-//
-//        jQuery("select[name='comuna'] option").remove();
-//        
-//        mostrarImagenCargando();        
-//        jQuery.getJSON("https://apis.modernizacion.cl/dpa/regiones/" + codigoRegion + "/provincias/" + codigoProvincia + "/comunas",
-//                function (comunas) {
-//                    jQuery("select[name='comuna']").append("<option value=\"\">-- Seleccione una comuna --</option>");
-//                    jQuery.each(comunas, function (indice, comuna) {
-//                        jQuery("select[name='comuna']").append("<option value=\"" + comuna.codigo + "\">" + comuna.nombre + "</option>");
-//                    });
-//                    
-//                    ocultarImagenCargando();
-//                }
-//        );
-//    });
-
-});
 
 
 function mostrarImagenCargando() {

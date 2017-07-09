@@ -48,12 +48,36 @@ class PersonaController {
         $conexion = DBConnection::getConexion();
         $personaDAO = new PersonaDAO($conexion);
         
-        return $personaDAO->agregar($rut, $pass, $nombre, $apellido, $fecha_nac, $sexo, $direccion, $fono, $id);
+        $persona = new Persona();
+        $persona->setRut($rut);
+        
+        $persona->setContrasena($pass);
+        $persona->setNombre($nombre);
+        $persona->setApellido($apellido);
+        $persona->setFecha_nac($fecha_nac);
+        $persona->setDireccion($direccion);
+        $persona->setSexo($sexo);
+        $persona->setTelefono($fono);
+        $persona->setId_perfil($id);
+        
+        return $personaDAO->agregar($persona);
     }
     
-    public static function ModificarPersona($persona){
+    public static function ModificarPersona($rut,$pass,$nombre,$apellido,$fecha_nac,$direccion,$sexo,$fono,$id){
         $conexion = DBConnection::getConexion();
         $personaDAO = new PersonaDAO($conexion);
+        
+        $persona = new Persona();
+        $persona->setRut($rut);
+        
+        $persona->setContrasena($pass);
+        $persona->setNombre($nombre);
+        $persona->setApellido($apellido);
+        $persona->setFecha_nac($fecha_nac);
+        $persona->setDireccion($direccion);
+        $persona->setSexo($sexo);
+        $persona->setTelefono($fono);
+        $persona->setId_perfil($id);
         
         return $personaDAO->actualizar($persona);
     }

@@ -27,6 +27,13 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                         $_GET["sexo"],$_GET["fono"],$_GET["id"]);
                 echo $exito;
                 break;
+            case 3:
+
+                $exito = PersonaController::ModificarPersona($_GET["rut"],$_GET["pass"],
+                        $_GET["nombre"],$_GET["apellido"],$_GET["fecha_nac"],$_GET["direccion"],
+                        $_GET["sexo"],$_GET["fono"],$_GET["id"]);
+                echo $exito;
+                break;
             default:
                 break;
         }

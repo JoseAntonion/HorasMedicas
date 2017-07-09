@@ -55,7 +55,7 @@ class DBConnection {
 
             $mysqlConexion->exec("
     CREATE TABLE `atencion` (
-        `ID_ATENCION` int(11) NOT NULL,
+        `ID_ATENCION` int NOT NULL,
         `FECHA_ATENCION` varchar(20) DEFAULT NULL,
         `HORA_ATENCION` varchar(20) DEFAULT NULL,
         `ESTADO` varchar(100) DEFAULT NULL,
@@ -72,12 +72,12 @@ class DBConnection {
             $mysqlConexion->exec("
     CREATE TABLE `persona` (
         `RUT` varchar(20) NOT NULL,
-        `CONTRASENA` varchar(254) DEFAULT NULL,
+        `CONTRASENA` varchar(256) DEFAULT NULL,
         `NOMBRE` varchar(100) DEFAULT NULL,
         `APELLIDO` varchar(100) DEFAULT NULL,
         `FECHA_NAC` date DEFAULT NULL,
         `SEXO` varchar(20) DEFAULT NULL,
-        `DIRECCION` varchar(254) DEFAULT NULL,
+        `DIRECCION` varchar(256) DEFAULT NULL,
         `TELEFONO` varchar(100) DEFAULT NULL,
         `VALOR_CONSULTA` int(11) DEFAULT NULL,
         `FECHA_CONTRATO` date DEFAULT NULL,
@@ -86,6 +86,7 @@ class DBConnection {
 
              $mysqlConexion->exec("
         ALTER TABLE `atencion`
+          MODIFY COLUMN ID_ATENCION INT auto_increment,
           ADD PRIMARY KEY (`ID_ATENCION`),
           ADD KEY `ATENCION_PERSONA_FK` (`RUT_PACIENTE`),
           ADD KEY `ATENCION_PERSONA_FKv1` (`RUT_MEDICO`)");

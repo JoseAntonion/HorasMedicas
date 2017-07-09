@@ -19,43 +19,62 @@ class PersonaDAO implements GenericDAO {
 
     public function actualizar($registro) {
         /*@var $registro Persona */
-        $query = "UPDATE persona SET RUT = :RUT,"
-                . " NOMBRE = :NOMBRE, APELLIDO = :APELLIDO,"
-                . " SEXO = :SEXO, DIRECCION = :DIRECCION,"
-                . " TELEFONO = :TELEFONO, FECHA_NAC = :FECHA_NAC "
-                . "WHERE RUT = :RUT " ;
-        
+        $query = "UPDATE persona SET RUT = :RUT, CONTRASENA = :CONTRASENA, NOMBRE = :NOMBRE, APELLIDO = :APELLIDO, FECHA_NAC = :FECHA_NAC,"
+                . " SEXO = :SEXO, DIRECCION = :DIRECCION, TELEFONO = :TELEFONO, ID_PERFIL = :ID "
+                . "WHERE RUT = :RUT ";
+                
         $sentencia = $this->conexion->prepare($query);
         
-        $sentencia->bindParam(':RUT', $registro->getRut());
-        $sentencia->bindParam(':NOMBRE', $registro->getNombre());
-        $sentencia->bindParam(':APELLIDO', $registro->getApellido());
-        $sentencia->bindParam(':SEXO', $registro->getSexo());
-        $sentencia->bindParam(':DIRECCION', $registro->getDireccion());        
-        $sentencia->bindParam(':TELEFONO', $registro->getTelefono());
-        $sentencia->bindParam(':FECHA_NAC', $registro->getFecha_nac());
-        
-        return $sentencia->execute();
-    }
-
-    public function agregar($rut,$pass,$nombre,$apellido,$fecha_nac,$sexo,$direccion,$telefono,$id) {
-        
-
-        $query = "INSERT INTO persona (RUT,CONTRASENA,NOMBRE,APELLIDO,FECHA_NAC,"
-                . " SEXO, DIRECCION, TELEFONO,ID_PERFIL) "
-                . "VALUES (:RUT, :CONTRASENA, :NOMBRE, :APELLIDO, :FECHA_NAC, :SEXO, :DIRECCION, :TELEFONO, :ID) ";
-        
-        $sentencia = $this->conexion->prepare($query);
-
+        $rut = $registro->getRut();
+        $contrasena = $registro->getContrasena();
+        $nombre = $registro->getNombre();
+        $apellido = $registro->getApellido();
+        $fecha_nac = $registro->getFecha_nac();
+        $sexo = $registro->getSexo();
+        $direccion = $registro->getDireccion();
+        $telefono = $registro->getTelefono();
+        $id_perfil = $registro->getId_perfil();
+                
         $sentencia->bindParam(':RUT', $rut);
-        $sentencia->bindParam(':CONTRASENA', $pass);
+        $sentencia->bindParam(':CONTRASENA', $contrasena);
         $sentencia->bindParam(':NOMBRE', $nombre);
         $sentencia->bindParam(':APELLIDO', $apellido);
         $sentencia->bindParam(':FECHA_NAC', $fecha_nac);
-        $sentencia->bindParam(':SEXO', $sexo);
+        $sentencia->bindParam(':SEXO',$sexo );
         $sentencia->bindParam(':DIRECCION', $direccion);
         $sentencia->bindParam(':TELEFONO', $telefono);
-        $sentencia->bindParam(':ID', $id);
+        $sentencia->bindParam(':ID', $id_perfil);
+              
+        return $sentencia->execute();
+    }
+
+    public function agregar($registro) {
+     
+        $query = "INSERT INTO persona (RUT,CONTRASENA,NOMBRE,APELLIDO,FECHA_NAC,"
+                . " SEXO, DIRECCION, TELEFONO,ID_PERFIL) "
+                . "VALUES (:RUT, :CONTRASENA, :NOMBRE, :APELLIDO, :FECHA_NAC, :SEXO, :DIRECCION, :TELEFONO, :ID) ";
+                
+        $sentencia = $this->conexion->prepare($query);
+        
+        $rut = $registro->getRut();
+        $contrasena = $registro->getContrasena();
+        $nombre = $registro->getNombre();
+        $apellido = $registro->getApellido();
+        $fecha_nac = $registro->getFecha_nac();
+        $sexo = $registro->getSexo();
+        $direccion = $registro->getDireccion();
+        $telefono = $registro->getTelefono();
+        $id_perfil = $registro->getId_perfil();
+                
+        $sentencia->bindParam(':RUT', $rut);
+        $sentencia->bindParam(':CONTRASENA', $contrasena);
+        $sentencia->bindParam(':NOMBRE', $nombre);
+        $sentencia->bindParam(':APELLIDO', $apellido);
+        $sentencia->bindParam(':FECHA_NAC', $fecha_nac);
+        $sentencia->bindParam(':SEXO',$sexo );
+        $sentencia->bindParam(':DIRECCION', $direccion);
+        $sentencia->bindParam(':TELEFONO', $telefono);
+        $sentencia->bindParam(':ID', $id_perfil);
               
         return $sentencia->execute();
 

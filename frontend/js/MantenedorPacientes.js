@@ -31,7 +31,7 @@ jQuery(document).ready(function () {
                 jQuery("input[name='dpFecha']").val(resul.fecha_nac);
                 jQuery("input[name='txtDireccion']").val(resul.direccion);
                 jQuery("select[name='cboSexo']").val(resul.sexo);
-                //jQuery("select[name='cboSexo']").append("<option value=\"" + beneficiario.id + "\">" + beneficiario.nombre + " " + beneficiario.apellido + "</option>")
+                
                 
 
             });

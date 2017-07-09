@@ -17,37 +17,113 @@ class PersonaDAO implements GenericDAO {
         $this->conexion = $conexion;
     }
 
-    
     public function actualizar($registro) {
+        /*@var $registro Persona */
+        $query = "UPDATE persona SET RUT = :RUT,"
+                . " NOMBRE = :NOMBRE, APELLIDO = :APELLIDO,"
+                . " SEXO = :SEXO, DIRECCION = :DIRECCION,"
+                . " TELEFONO = :TELEFONO, FECHA_NAC = :FECHA_NAC "
+                . "WHERE RUT = :RUT " ;
         
+        $sentencia = $this->conexion->prepare($query);
+        
+        $sentencia->bindParam(':RUT', $registro->getRut());
+        $sentencia->bindParam(':NOMBRE', $registro->getNombre());
+        $sentencia->bindParam(':APELLIDO', $registro->getApellido());
+        $sentencia->bindParam(':SEXO', $registro->getSexo());
+        $sentencia->bindParam(':DIRECCION', $registro->getDireccion());        
+        $sentencia->bindParam(':TELEFONO', $registro->getTelefono());
+        $sentencia->bindParam(':FECHA_NAC', $registro->getFecha_nac());
+        
+        return $sentencia->execute();
     }
 
     public function agregar($registro) {
         /*@var $registro Persona */
-        
 
-        
-        $query = "INSERT INTO persona (RUT,CONTRASENA,NOMBRE,APELLIDO, FECHA_NAC, SEXO, DIRECCION, TELEFONO, VALOR_CONSULTA, FECHA_CONTRATO, ID_PERFIL) VALUES (:rut, :nombre, :apellido, :fecha_nacimiento, :email) ";
+        $query = "INSERT INTO persona (RUT,NOMBRE,APELLIDO,FECHA_NAC,"
+                . " SEXO, DIRECCION, TELEFONO) "
+                . "VALUES (:RUT,:NOMBRE,APELLIDO,:FECHA_NAC,:SEXO,:DIRECCION,:TELEFONO) ";
         
         $sentencia = $this->conexion->prepare($query);
-        
-        $rut = $registro->getRut();
-        $nombre = $registro->getNombre();
-        $apellido = $registro->getApellido();
-        $fechaNacimiento = $registro->getFechaNacimiento();
-        $email = $registro->getEmail();
-        
-        $sentencia->bindParam(':rut', $rut);
-        $sentencia->bindParam(':nombre', $nombre);
-        $sentencia->bindParam(':apellido', $apellido);
-        $sentencia->bindParam(':fecha_nacimiento', $fechaNacimiento);
-        $sentencia->bindParam(':email', $email);        
+
+        $sentencia->bindParam(':RUT', $registro->getRut());
+        $sentencia->bindParam(':NOMBRE', $registro->getNombre());
+        $sentencia->bindParam(':APELLIDO', $registro->getApellido());
+        $sentencia->bindParam(':FECHA_NAC', $registro->getFecha_nac());
+        $sentencia->bindParam(':SEXO', $registro->getSexo());
+        $sentencia->bindParam(':DIRECCION', $registro->getDireccion());
+        $sentencia->bindParam(':TELEFONO', $registro->getTelefono());
               
         return $sentencia->execute();
 
     }
 
-    public function buscarPorId($idRegistro) {
+    public function eliminar($idRegistro) {       
+        
+  
+        $query = "DELETE FROM persona WHERE RUT = :rut ";      
+        $sentencia = $this->conexion->prepare($query);      
+        $sentencia->bindParam(':rut', $idRegistro);
+                
+        return $sentencia->execute();   
+    }
+
+    public function listarTodos() {
+        /*@var $persona Persona */
+        
+        $listado = array();
+        $persona = new Persona();
+        $registros = $this->conexion->query("SELECT * FROM persona");
+        
+        if($registros != null) {
+            foreach($registros as $fila) {
+                $persona = new Persona();
+                $persona->setRut($fila["RUT"]);
+                $persona->setNombre($fila["NOMBRE"]);
+                $persona->setApellido($fila["APELLIDO"]);
+                $persona->setFecha_nac($fila["FECHA_NAC"]);
+                $persona->setSexo($fila["SEXO"]);
+                $persona->setDireccion($fila["DIRECCION"]);
+                $persona->setTelefono($fila["TELEFONO"]);
+
+                array_push($listado, $persona);
+            }
+        }
+        
+        return $listado;
+    }
+
+    public function listarPorParametro($idRegistro) {
+        /*@var $persona Persona */
+        
+        $sentencia = $this->conexion->prepare("SELECT * FROM PERSONA WHERE ID_PERFIL = :ID");
+        
+        $sentencia->bindParam(':ID', $idRegistro);
+        
+        $sentencia->execute();
+
+        
+        while($registro = $sentencia->fetch()) {            
+            $persona = new Persona();
+            $persona->setRut($registro["RUT"]);            
+            $persona->setContrasena($registro["CONTRASENA"]);
+            $persona->setNombre($registro["NOMBRE"]); 
+            $persona->setApellido($registro["APELLIDO"]);
+            $persona->setFecha_nac($registro["FECHA_NAC"]); 
+            $persona->setSexo($registro["SEXO"]); 
+            $persona->setDireccion($registro["DIRECCION"]); 
+            $persona->setTelefono($registro["TELEFONO"]); 
+            $persona->setValor_consulta($registro["VALOR_CONSULTA"]); 
+            $persona->setFecha_contrato($registro["FECHA_CONTRATO"]); 
+            $persona->setId_perfil($registro["ID_PERFIL"]); 
+        }
+        
+        return $persona;
+    }
+
+    public function BuscarPorId($idRegistro) {
+        
         $persona = null;
         
         $sentencia = $this->conexion->prepare("SELECT * FROM PERSONA WHERE RUT = :p_rut");
@@ -73,36 +149,6 @@ class PersonaDAO implements GenericDAO {
         }
         
         return $persona;
-    }
-
-    public function eliminar($idRegistro) {
-        
-    }
-
-    public function listarTodos() {
-        $listado = array();
-        $persona = new Persona();
-        $registros = $this->conexion->query("SELECT * FROM persona");
-        
-        if($registros != null) {
-            foreach($registros as $fila) {
-                $persona = new Persona();
-                $persona->setRut($fila["RUT"]);
-                $persona->setNombre($fila["NOMBRE"]);
-                $persona->setApellido($fila["APELLIDO"]);
-                $persona->setFecha_nac($fila["FECHA_NAC"]);
-                $persona->setSexo($fila["SEXO"]);
-                $persona->setDireccion($fila["DIRECCION"]);
-                $persona->setTelefono($fila["TELEFONO"]);
-
-                array_push($listado, $persona);
-            }
-        }
-        
-        return $listado;
-    }
-
-    public function listarPorParametro($idRegistro) {
         
     }
 

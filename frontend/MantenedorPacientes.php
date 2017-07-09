@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
 if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
-    $listaPersonas = PersonaController::ListarPersonas();
+    $listaPersonas = PersonaController::ListarTodo();
     $usuarioLogeado = $_SESSION["nombre"] . ' ' . $_SESSION["apellido"];
     $mantPacientes = 'MantenedorPacientes.php';
     $mantMedicos = 'MantenedorMedicos.php';
@@ -58,7 +58,6 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         
-
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -73,11 +72,7 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
         <link rel="icon" href="../../favicon.ico">
 
-
-
-
         <title>Hospital Municipal</title>
-
 
         <!-- Bootstrap core CSS -->
         <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
@@ -130,7 +125,7 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
                         <label for="example-text-input" class="col-2 col-form-label">Rut</label>
                         <div class="col-8">
                             <input class="form-control" type="text" 
-                                   value="<?php if(isset($buscaPersona)){echo $buscaPersona->getRut();} ?>" 
+                                   value="" 
                                    id="txtRut" 
                                    name="txtRut">
                         </div>

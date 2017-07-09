@@ -6,26 +6,6 @@ include_once __DIR__."/../dao/PersonaDAO.php";
 
 class PersonaController {    
     
-//    public static function registrarUsuario($email, $clave, $confirmacionClave) {
-//        
-//        // validar que los datos sean válidos        
-//        if($clave != $confirmacionClave) {
-//            return false;
-//        }
-//        
-//        $usuario = new Usuario();        
-//        $usuario->setEmail($email);
-//        
-//        $hash = password_hash($clave, PASSWORD_BCRYPT);
-//        $usuario->setClave($hash);
-//        
-//        $conexion = ConexionDB::getConexion();
-//        $daoUsuario= new UsuarioDAO($conexion);
-//        
-//        return $daoUsuario->agregar($usuario); 
-//                       
-//    }
-    
     public static function validarPersonaClave($rut, $contrasena) {
         
         $conexion = DBConnection::getConexion();
@@ -56,26 +36,35 @@ class PersonaController {
         return false;
     }
     
-    public static function getInfoCliente($idCliente) {
-        
+    public static function ListarPersonasPorPerfil($perfil){
         $conexion = DBConnection::getConexion();
         $personaDAO = new PersonaDAO($conexion);
         
-        return json_encode($personaDAO->buscarPorId($idCliente));
-        //json_encode transforma la respuesta de la llamada al metodo buscarPorId a un objeto json
-        
-     
-        //return json_encode($cliente->jsonSerialize());
-    }
-    
-    public static function ListarPersonas(){
-        $conexion = DBConnection::getConexion();
-        $personaDAO = new PersonaDAO($conexion);
-        
-        return $personaDAO->listarTodos();
+        return $personaDAO->listarPorParametro($perfil);
         
     }
 
+    public static function AgregarPersona($persona){
+        $conexion = DBConnection::getConexion();
+        $personaDAO = new PersonaDAO($conexion);
+        
+        return $personaDAO->agregar($persona);
+    }
+    
+    public static function ModificarPersona($persona){
+        $conexion = DBConnection::getConexion();
+        $personaDAO = new PersonaDAO($conexion);
+        
+        return $personaDAO->actualizar($persona);
+    }
+    
+    public static function EliminarPersona($rut){
+        $conexion = DBConnection::getConexion();
+        $personaDAO = new PersonaDAO($conexion);
+        
+        return $personaDAO->eliminar($rut);
+    }
+    
     public static function BuscarPorId($idCliente){
         $conexion = DBConnection::getConexion();
         $personaDAO = new PersonaDAO($conexion);
@@ -83,5 +72,12 @@ class PersonaController {
         //return $personaDAO->buscarPorId($idCliente);
         return json_encode($personaDAO->buscarPorId($idCliente));
     }
-    
+ 
+    public static function ListarTodo(){
+       $conexion = DBConnection::getConexion();
+        $personaDAO = new PersonaDAO($conexion);
+        
+        return $personaDAO->listarTodos();
+        
+    }
 }

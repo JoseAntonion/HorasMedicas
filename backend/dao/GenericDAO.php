@@ -18,8 +18,8 @@ interface GenericDAO {
     
     public function eliminar($idRegistro);
     
-    public function buscarPorId($idRegistro);
-    
+    public function BuscarPorId($idRegistro);
+
     public function listarPorParametro($idRegistro);
     
     public function listarTodos();

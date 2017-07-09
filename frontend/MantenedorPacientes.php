@@ -4,7 +4,7 @@ include_once __DIR__ . "/../backend/controller/PersonaController.php";
 $usuarioLogeado = "";
 $opcionesMenu = "";
 $buscaPersona = new Persona();
-$mensaje = "";
+$mensajePacientes = "";
 $clase = "";
 
 
@@ -61,12 +61,14 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
         <link href="css/bootstrap-theme.css" rel="stylesheet">
         <link href="css/bootstrap-theme.min.css" rel="stylesheet">
         <link href="css/bootstrap.css" rel="stylesheet">
+        <link rel="icon" href="/../HorasMedicas/Hospital.ico">
 
         <script src="js/jquery-3.2.1.js"></script>
         <script src="js/jquery.Rut.js"></script>
         <script src="js/MantenedorPacientes.js" ></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/holder.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
         <title>Hospital Municipal</title>
 
         <!-- Custom styles for this template -->
@@ -101,15 +103,17 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
 
         <br/>
         <br/>
-        <br/>
-        <br/>
+        
 
 
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-10">
-                <div class="<? echo $clase ?>" role="alert" style="text-align: center" id="mensaje">
-                    <? echo $mensaje ?>
+                <div class="" role="alert" 
+                     style="text-align: center" 
+                     id="mensaje" 
+                     value="">
+                    <label id="mensajePacientes"></label>
                 </div>
             </div>
             <div class="col-md-1"></div>
@@ -119,7 +123,7 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <form action="#" method="POST">
+                <form action="#" method="POST" id="formularioPaciente">
                     <div class="form-group row">
                         <label for="example-text-input" class="col-2 col-form-label">Rut</label>
                         <div class="col-8">
@@ -204,6 +208,7 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
                         <a href="#" class="btn btn-primary" type="submit" id="btnEliminar">Eliminar</a>
                         <a href="#" class="btn btn-primary" type="submit" id="btnEliminar">Modificar</a>
                         <a href="#" class="btn btn-primary" type="submit" id="btnBuscar">Buscar</a>
+                        <a href="#" class="btn btn-primary" type="reset" id="btnLimpiar">Limpiar</a>
                     </div>
                 </form>
             </div>

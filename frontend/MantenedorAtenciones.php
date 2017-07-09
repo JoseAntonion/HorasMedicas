@@ -102,25 +102,160 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
         </nav>
         <br/>
         <br/>
-        <br/>
-        <br/>
+        
 
-        <div>
-            <h1>
-                Menu Atenciones
-            </h1>
+
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="" role="alert" 
+                     style="text-align: center" 
+                     id="mensaje" 
+                     value="">
+                    <label id="mensajePacientes"></label>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
         </div>
 
-        <!-- Bootstrap core JavaScript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-        <script src="../../dist/js/bootstrap.min.js"></script>
-        <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-        <script src="../../assets/js/vendor/holder.min.js"></script>
-        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <form action="#" method="POST" id="formularioPaciente">
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">Rut</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text" 
+                                   value="" 
+                                   id="txtRut" 
+                                   name="txtRut">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">Contraseña</label>
+                        <div class="input-group" id="contraseña">
+                            <input class="form-control" type="password" 
+                                   value="" 
+                                   id="txtContrasena" 
+                                   name="txtContrasena" />
+                            <span id="show-hide-passwd" action="hide" 
+                                  class="input-group-addon glyphicon glyphicon glyphicon-eye-open"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-search-input" class="col-2 col-form-label">Nombre</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text" 
+                                   value="" 
+                                   id="txtNombre"
+                                   name="txtNombre">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-email-input" class="col-2 col-form-label">Apellido</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text" 
+                                   value="" 
+                                   id="txtApellido"
+                                   name="txtApellido">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-date-input" class="col-2 col-form-label">Fecha de Nacimiento</label>
+                        <div class="col-8">
+                            <input class="form-control" type="date" 
+                                   value="" 
+                                   id="dpFecha"
+                                   name="dpFecha">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-url-input" class="col-2 col-form-label">Direccion</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text"
+                                   value="" 
+                                   id="txtDireccion"
+                                   name="txtDireccion">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="example-url-input" class="col-2 col-form-label">Teléfono</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text"
+                                   value="" 
+                                   id="txtFono"
+                                   name="txtFono">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">Sexo</label>
+                        <div class="col-5 selectContainer">
+                            <select class="form-control" name="cboSexo">
+                                <option value="">Seleccione Sexo</option>
+                                <option value="FEMENINO">Femenino</option>
+                                <option value="MASCULINO">Masculino</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="btn-group btn-group-justified">
+                        <a href="#" class="btn btn-primary" type="submit" id="btnAgregar">Agregar</a>
+                        <a href="#" class="btn btn-primary" type="submit" id="btnEliminar">Eliminar</a>
+                        <a href="#" class="btn btn-primary" type="submit" id="btnEliminar">Modificar</a>
+                        <a href="#" class="btn btn-primary" type="submit" id="btnBuscar">Buscar</a>
+                        <a href="#" class="btn btn-primary" type="reset" id="btnLimpiar">Limpiar</a>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+
+                <h2 class="sub-header">Lista de Pacientes</h2>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Rut</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Fecha de Nacimiento</th>
+                                <th>Sexo</th>
+                                <th>Direccion</th>
+                                <th>Telefono</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            foreach ($listaPersonas as $persona) {
+                                /* @var $persona Persona */
+                                ?>
+                                <tr>
+                                    <td><?= $persona->getRut() ?></td>
+                                    <td><?= $persona->getNombre() ?></td>
+                                    <td><?= $persona->getApellido() ?></td>
+                                    <td><?= $persona->getFecha_nac() ?></td>
+                                    <td><?= $persona->getSexo() ?></td>
+                                    <td><?= $persona->getDireccion() ?></td>
+                                    <td><?= $persona->getTelefono() ?></td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+
     </body>
 </html>
 

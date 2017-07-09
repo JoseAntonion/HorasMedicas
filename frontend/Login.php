@@ -37,10 +37,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <link href="/HorasMedicas/frontend/css/bootstrap-theme.min.css" rel="stylesheet">
         <link href="/HorasMedicas/frontend/css/bootstrap.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="icon" href="../../favicon.ico">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <link rel="icon" href="/../HorasMedicas/Hospital.ico">
 
         <title>Login</title>
     </head>

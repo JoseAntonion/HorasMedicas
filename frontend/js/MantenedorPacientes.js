@@ -8,20 +8,20 @@ jQuery(document).ready(function () {
         }
     });
 
-    
+
     $('#show-hide-passwd').on('click', function (e) {
-            e.preventDefault();
-            var current = $(this).attr('action');
-            if (current == 'hide') {
-                $(this).prev().attr('type', 'text');
-                $(this).removeClass('glyphicon-eye-open').addClass('glyphicon-eye-close').attr('action', 'show');
-            }
-            if (current == 'show') {
-                $(this).prev().attr('type', 'password');
-                $(this).removeClass('glyphicon-eye-close').addClass('glyphicon-eye-open').attr('action', 'hide');
-            }
-        })
-    
+        e.preventDefault();
+        var current = $(this).attr('action');
+        if (current === 'hide') {
+            $(this).prev().attr('type', 'text');
+            $(this).removeClass('glyphicon-eye-open').addClass('glyphicon-eye-close').attr('action', 'show');
+        }
+        if (current === 'show') {
+            $(this).prev().attr('type', 'password');
+            $(this).removeClass('glyphicon-eye-close').addClass('glyphicon-eye-open').attr('action', 'hide');
+        }
+    })
+
 
 
     /**
@@ -33,7 +33,7 @@ jQuery(document).ready(function () {
         if (rut !== "") {
 
             mostrarImagenCargando();
-            jQuery.getJSON("/HorasMedicas/backend/info-cliente2.php", {id: rut,opcion: 1}, function (resul) {
+            jQuery.getJSON("/HorasMedicas/backend/info-cliente2.php", {id: rut, opcion: 1}, function (resul) {
 
                 jQuery("input[name='txtContrasena']").val(resul.contrasena);
                 jQuery("input[name='txtNombre']").val(resul.nombre);
@@ -61,19 +61,23 @@ jQuery(document).ready(function () {
                 direccion !== "" && sexo !== "") {
 
             jQuery.getJSON("/HorasMedicas/backend/info-cliente2.php",
-            {rut: rut,pass:pass,nombre:nombre,apellido:apellido,
-                fecha_nac:fecha_nac,direccion:direccion,sexo:sexo,
-                fono:fono,id:1,opcion:2}, 
-            function (resul) {
-                if(resul){
-                    jQuery("#mensaje").val("Paciente Agregado Correctamente");
-                    jQuery("#mensaje").addClass("alert alert-success");
-                }else{
-                    
-                }
-            });
+                    {rut: rut, pass: pass, nombre: nombre, apellido: apellido,
+                        fecha_nac: fecha_nac, direccion: direccion, sexo: sexo,
+                        fono: fono, id: 1, opcion: 2},
+                    function (resul) {
+                        if (resul) {
+                            jQuery("#mensajePacientes").append("Paciente agregado correctamente");
+                            jQuery("#mensaje").addClass("alert alert-success");
+                        } else {
+
+                        }
+                    });
 
         }
+    });
+
+    jQuery("#btnLimpiar").click(function () {
+        $("#formularioPaciente")[0].reset();
     });
 
 

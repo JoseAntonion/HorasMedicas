@@ -32,7 +32,7 @@ jQuery(document).ready(function () {
         var rut = $("input[name='txtRut']").val();
         if (rut !== "") {
 
-            mostrarImagenCargando();
+            
             jQuery.getJSON("/HorasMedicas/backend/info-cliente2.php", {id: rut, opcion: 1}, function (resul) {
 
                 jQuery("input[name='txtContrasena']").val(resul.contrasena);
@@ -42,7 +42,7 @@ jQuery(document).ready(function () {
                 jQuery("input[name='txtDireccion']").val(resul.direccion);
                 jQuery("select[name='cboSexo']").val(resul.sexo);
 
-                ocultarImagenCargando();
+                
             });
 
         }
@@ -69,7 +69,8 @@ jQuery(document).ready(function () {
                             jQuery("#mensajePacientes").append("Paciente agregado correctamente");
                             jQuery("#mensaje").addClass("alert alert-success");
                         } else {
-
+                            jQuery("#mensajePacientes").append("Error al agregar paciente. Intente nuevamente");
+                            jQuery("#mensaje").addClass("alert alert-danger");
                         }
                     });
 
@@ -94,10 +95,11 @@ jQuery(document).ready(function () {
                 fono:fono,id:1,opcion:3}, 
             function (resul) {
                 if(resul){
-                    jQuery("#mensaje").val("Paciente Modificado Correctamente");
+                    jQuery("#mensajePacientes").append("Paciente Modificado Correctamente");
                     jQuery("#mensaje").addClass("alert alert-success");
                 }else{
-                    
+                    jQuery("#mensajePacientes").append("Error almodificar. Intente nuevamente");
+                    jQuery("#mensaje").addClass("alert alert-danger");
                 }
             });
 
@@ -105,10 +107,6 @@ jQuery(document).ready(function () {
             });        
             
 
-      
-        
-        
-    });
 
     jQuery("#btnLimpiar").click(function () {
         $("#formularioPaciente")[0].reset();

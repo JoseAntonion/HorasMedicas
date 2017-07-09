@@ -17,15 +17,25 @@
 }
 
 .piegrande{
-    align-content: flex-end
+    align-content: flex-end;
+}
+
+.input-group{
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 50px;
 }
 
 .campoFormulario {
-    
+
+}
+
+#show-hide-passwd{
+    cursor: pointer;
 }
 
 .botonera {
-    
+
 }
 
 .error {

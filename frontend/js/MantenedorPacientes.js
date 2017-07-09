@@ -2,37 +2,67 @@
 jQuery(document).ready(function () {
 
     jQuery.ajaxSetup({
-        "error":function(respuesta, jqXHR, errorMsg) {            
-            ocultarImagenCargando();  
-            alert("ha ocurrido el siguiente error: "+errorMsg);
+        "error": function (respuesta, jqXHR, errorMsg) {
+            ocultarImagenCargando();
+            alert("ha ocurrido el siguiente error: " + errorMsg);
         }
     });
 
+    
+    $('#show-hide-passwd').on('click', function (e) {
+            e.preventDefault();
+            var current = $(this).attr('action');
+            if (current == 'hide') {
+                $(this).prev().attr('type', 'text');
+                $(this).removeClass('glyphicon-eye-open').addClass('glyphicon-eye-close').attr('action', 'show');
+            }
+            if (current == 'show') {
+                $(this).prev().attr('type', 'password');
+                $(this).removeClass('glyphicon-eye-close').addClass('glyphicon-eye-open').attr('action', 'hide');
+            }
+        })
+    
+
 
     /**
-     * Manejo del campo RUT
+     * Busqueda por RUT
      */
-    
     //jQuery("input[name='txtRut']").Rut({format_on:'keyup'});
-    jQuery("input[name='txtRut']").blur(function () {
-        if (this.value !== "") {
-            
-            
-            
-            
-            
-         
+    jQuery("#btnBuscar").click(function () {
+        var rut = $("input[name='txtRut']").val();
+        if (rut !== "") {
 
-            //mostrarImagenCargando();
-            jQuery.getJSON("/HorasMedicas/backend/info-cliente2.php", {id: this.value}, function (resul) {
+            mostrarImagenCargando();
+            jQuery.getJSON("/HorasMedicas/backend/info-cliente2.php", {id: rut}, function (resul) {
+
+                jQuery("input[name='txtContrasena']").val(resul.contrasena);
+                jQuery("input[name='txtNombre']").val(resul.nombre);
+                jQuery("input[name='txtApellido']").val(resul.apellido);
+                jQuery("input[name='dpFecha']").val(resul.fecha_nac);
+                jQuery("input[name='txtDireccion']").val(resul.direccion);
+                jQuery("select[name='cboSexo']").val(resul.sexo);
+
+                ocultarImagenCargando()
+
+            });
+
+        }
+    });
+
+    jQuery("#btnAgregar").click(function () {
+        var rut = $("input[name='txtRut']").val();
+        if (rut !== "") {
+
+            mostrarImagenCargando();
+            jQuery.getJSON("/HorasMedicas/backend/info-cliente2.php", {id: rut}, function (resul) {
 
                 jQuery("input[name='txtNombre']").val(resul.nombre);
                 jQuery("input[name='txtApellido']").val(resul.apellido);
                 jQuery("input[name='dpFecha']").val(resul.fecha_nac);
                 jQuery("input[name='txtDireccion']").val(resul.direccion);
                 jQuery("select[name='cboSexo']").val(resul.sexo);
-                
-                
+
+                ocultarImagenCargando()
 
             });
 

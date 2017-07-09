@@ -124,7 +124,7 @@ class PersonaDAO implements GenericDAO {
 
     public function BuscarPorIdJSON($idRegistro) {
         
-        $persona = null;
+        $persona = new Persona();
         
         $sentencia = $this->conexion->prepare("SELECT * FROM PERSONA WHERE RUT = :p_rut");
         
@@ -134,7 +134,7 @@ class PersonaDAO implements GenericDAO {
 
         
         while($registro = $sentencia->fetch()) {            
-            $persona = new Persona();
+            
             $persona->setRut($registro["RUT"]);            
             $persona->setContrasena($registro["CONTRASENA"]);
             $persona->setNombre($registro["NOMBRE"]); 

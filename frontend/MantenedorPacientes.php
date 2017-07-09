@@ -69,6 +69,7 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
 
         <!-- Custom styles for this template -->
         <link href="css/dashboard.css" rel="stylesheet">
+        <link href="css/estilo.css" rel="stylesheet">
     </head>
 
     <body>
@@ -112,6 +113,17 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
                                    value="" 
                                    id="txtRut" 
                                    name="txtRut">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">Contraseña</label>
+                        <div class="input-group" id="contraseña">
+                            <input class="form-control" type="password" 
+                                   value="" 
+                                   id="txtContrasena" 
+                                   name="txtContrasena" />
+                            <span id="show-hide-passwd" action="hide" 
+                                  class="input-group-addon glyphicon glyphicon glyphicon-eye-open"></span>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -164,10 +176,10 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
                     </div>
 
                     <div class="btn-group btn-group-justified">
-                        <a class="btn btn-primary" type="submit">Agregar</a>
-                        <a class="btn btn-primary" type="submit">Eliminar</a>
-                        <a class="btn btn-primary" type="submit">Modificar</a>
-                        <a href="MantenedorPacientes.php" class="btn btn-primary" type="submit">Buscar</a>
+                        <a href="#" class="btn btn-primary" type="submit" id="btnAgregar">Agregar</a>
+                        <a href="#" class="btn btn-primary" type="submit" id="btnEliminar">Eliminar</a>
+                        <a href="#" class="btn btn-primary" type="submit" id="btnEliminar">Modificar</a>
+                        <a href="#" class="btn btn-primary" type="submit" id="btnBuscar">Buscar</a>
                     </div>
                 </form>
             </div>

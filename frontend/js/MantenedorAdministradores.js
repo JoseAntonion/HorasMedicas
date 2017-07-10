@@ -8,58 +8,31 @@ jQuery(document).ready(function () {
         }
     });
 
-    jQuery("input[name='rut']").Rut({format_on:'keyup'});
-    jQuery("input[name='rut']").blur(function () {
-        if (this.value !== "") {
-            
-            if(!validarRut()) {
-                jQuery(this).addClass("error");
-                return;
-            } else {
-                jQuery(this).removeClass("error");
-            }
-
-            var rutSinFormato = jQuery.Rut.quitarFormato(this.value);
-            var mantisa = rutSinFormato.slice(0,rutSinFormato.length -1);
-            
-           
-        }
-    });
-
 
     $('#show-hide-passwd').on('click', function (e) {
-        e.preventDefault();
-        var current = $(this).attr('action');
-        if (current == 'hide') {
-            $(this).prev().attr('type', 'text');
-            $(this).removeClass('glyphicon-eye-open').addClass('glyphicon-eye-close').attr('action', 'show');
-        }
-        if (current == 'show') {
-            $(this).prev().attr('type', 'password');
-            $(this).removeClass('glyphicon-eye-close').addClass('glyphicon-eye-open').attr('action', 'hide');
-        }
+            e.preventDefault();
+            var current = $(this).attr('action');
+            if (current == 'hide') {
+                $(this).prev().attr('type', 'text');
+                $(this).removeClass('glyphicon-eye-open').addClass('glyphicon-eye-close').attr('action', 'show');
+            }
+            if (current == 'show') {
+                $(this).prev().attr('type', 'password');
+                $(this).removeClass('glyphicon-eye-close').addClass('glyphicon-eye-open').attr('action', 'hide');
+            }
     })
-
+    
 
 
     /**
      * Busqueda por RUT
      */
-    jQuery("input[name='txtRut']").Rut({format_on: 'keyup'});
-    var rut = $("input[name='txtRut']").val();
-    if (rut !== "") {
-        if (!validarRut()) {
-            jQuery(rut).addClass("error");
-            return;
-        } else {
-            jQuery(rut).removeClass("error");
-        }
-    }
+    //jQuery("input[name='txtRut']").Rut({format_on:'keyup'});
     jQuery("#btnBuscar").click(function () {
         var rut = $("input[name='txtRut']").val();
         if (rut !== "") {
 
-
+            
             jQuery.getJSON("/HorasMedicas/backend/info-cliente2.php", {id: rut, opcion: 1}, function (resul) {
 
                 jQuery("input[name='txtContrasena']").val(resul.contrasena);
@@ -69,70 +42,70 @@ jQuery(document).ready(function () {
                 jQuery("input[name='txtDireccion']").val(resul.direccion);
                 jQuery("select[name='cboSexo']").val(resul.sexo);
 
-
+                
             });
 
         }
     });
 
-    jQuery("#btnAgregar").click(function () {
-        var rut = $("input[name='txtRut']").val();
-        var pass = $("input[name='txtContrasena']").val();
-        var nombre = $("input[name='txtNombre']").val();
-        var apellido = $("input[name='txtApellido']").val();
-        var fecha_nac = $("#dpFecha").val();
-        var direccion = $("input[name='txtDireccion']").val();
-        var sexo = $("select[name='cboSexo']").val();
-        var fono = $("input[name='txtFono']").val();
-        if (rut !== "" && pass !== "" && nombre !== "" && apellido !== "" && fecha_nac !== "" &&
-                direccion !== "" && sexo !== "") {
+        jQuery("#btnAgregar").click(function () {
+            var rut = $("input[name='txtRut']").val();
+            var pass = $("input[name='txtContrasena']").val();
+            var nombre = $("input[name='txtNombre']").val();
+            var apellido = $("input[name='txtApellido']").val();
+            var fecha_nac = $("#dpFecha").val();
+            var direccion = $("input[name='txtDireccion']").val();
+            var sexo = $("select[name='cboSexo']").val();
+            var fono = $("input[name='txtFono']").val();
+            if (rut !== "" && pass !== "" && nombre !== "" && apellido !== "" && fecha_nac !== "" &&
+                    direccion !== "" && sexo !== "") {
 
             jQuery.getJSON("/HorasMedicas/backend/info-cliente2.php",
                     {rut: rut, pass: pass, nombre: nombre, apellido: apellido,
                         fecha_nac: fecha_nac, direccion: direccion, sexo: sexo,
-                        fono: fono, id: 1, opcion: 2},
+                        fono: fono, id: 5, opcion: 2},
                     function (resul) {
                         if (resul) {
-                            jQuery("#mensajePacientes").append("Paciente agregado correctamente");
+                            jQuery("#mensajePacientes").append("Administrador agregado correctamente");
                             jQuery("#mensaje").addClass("alert alert-success");
                         } else {
-                            jQuery("#mensajePacientes").append("Error al agregar paciente. Intente nuevamente");
+                            jQuery("#mensajePacientes").append("Error al agregar Administrador. Intente nuevamente");
                             jQuery("#mensaje").addClass("alert alert-danger");
                         }
                     });
 
-        }
-    });
-
-    jQuery("#btnModificar").click(function () {
-        var rut = $("input[name='txtRut']").val();
-        var pass = $("input[name='txtContrasena']").val();
-        var nombre = $("input[name='txtNombre']").val();
-        var apellido = $("input[name='txtApellido']").val();
-        var fecha_nac = $("#dpFecha").val();
-        var direccion = $("input[name='txtDireccion']").val();
-        var sexo = $("select[name='cboSexo']").val();
-        var fono = $("input[name='txtFono']").val();
-        if (rut !== "" && pass !== "" && nombre !== "" && apellido !== "" && fecha_nac !== "" &&
-                direccion !== "" && sexo !== "") {
+            }
+            });
+            
+            jQuery("#btnModificar").click(function () {
+            var rut = $("input[name='txtRut']").val();
+            var pass = $("input[name='txtContrasena']").val();
+            var nombre = $("input[name='txtNombre']").val();
+            var apellido = $("input[name='txtApellido']").val();
+            var fecha_nac = $("#dpFecha").val();
+            var direccion = $("input[name='txtDireccion']").val();
+            var sexo = $("select[name='cboSexo']").val();
+            var fono = $("input[name='txtFono']").val();
+            if (rut !== "" && pass !== "" && nombre !== "" && apellido !== "" && fecha_nac !== "" &&
+                    direccion !== "" && sexo !== "") {
 
             jQuery.getJSON("/HorasMedicas/backend/info-cliente2.php",
-                    {rut: rut, pass: pass, nombre: nombre, apellido: apellido,
-                        fecha_nac: fecha_nac, direccion: direccion, sexo: sexo,
-                        fono: fono, id: 1, opcion: 3},
-                    function (resul) {
-                        if (resul) {
-                            jQuery("#mensajePacientes").append("Paciente Modificado Correctamente");
-                            jQuery("#mensaje").addClass("alert alert-success");
-                        } else {
-                            jQuery("#mensajePacientes").append("Error almodificar. Intente nuevamente");
-                            jQuery("#mensaje").addClass("alert alert-danger");
-                        }
-                    });
+            {rut: rut,pass:pass,nombre:nombre,apellido:apellido,
+                fecha_nac:fecha_nac,direccion:direccion,sexo:sexo,
+                fono:fono,id:5,opcion:3}, 
+            function (resul) {
+                if(resul){
+                    jQuery("#mensajePacientes").append("Administrador Modificado Correctamente");
+                    jQuery("#mensaje").addClass("alert alert-success");
+                }else{
+                    jQuery("#mensajePacientes").append("Error al modificar. Intente nuevamente");
+                    jQuery("#mensaje").addClass("alert alert-danger");
+                }
+            });
 
-        }
-    });
-
+            }
+            });        
+            
 
 
     jQuery("#btnLimpiar").click(function () {

@@ -13,6 +13,7 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
     $mantSecretarias = 'MantenedorSecretarias.php';
     $mantDirectores = 'MantenedorDirectores.php';
     $estadisticas = 'Estadisticas.php';
+    $mantAdministradores = 'MantenedorAdministradores.php';
 
     if($_SESSION["id_perfil"] == '1'){ // PACIENTE
         $opcionesMenu = '<li><a href="'.$muestraAtenciones.'">ATENCIONES</a></li>';
@@ -36,6 +37,7 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
         $opcionesMenu = $opcionesMenu.'<li><a href="'.$mantMedicos.'">MEDICOS</a></li>';
         $opcionesMenu = $opcionesMenu.'<li><a href="'.$mantSecretarias.'">SECRETARIAS</a></li>';
         $opcionesMenu = $opcionesMenu.'<li><a href="'.$mantDirectores.'">DIRECTORES</a></li>';
+        $opcionesMenu = $opcionesMenu.'<li><a href="'.$mantAdministradores.'">ADMINISTRADORES</a></li>';
     }
     
     

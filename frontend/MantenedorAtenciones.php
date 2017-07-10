@@ -1,9 +1,10 @@
 <?php
 session_start();
+include_once __DIR__ . "/../backend/controller/AtencionController.php";
 $usuarioLogeado = "";
 $opcionesMenu = "";
 if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
-    
+    $listaAtenciones = AtencionController::listarAtencionesRegistradas();
     $usuarioLogeado = $_SESSION["nombre"] . ' ' . $_SESSION["apellido"];
     $mantPacientes = 'MantenedorPacientes.php';
     $mantMedicos = 'MantenedorMedicos.php';
@@ -11,32 +12,30 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
     $mantSecretarias = 'MantenedorSecretarias.php';
     $mantDirectores = 'MantenedorDirectores.php';
     $estadisticas = 'Estadisticas.php';
-    
-    if($_SESSION["id_perfil"] == '1'){ // PACIENTE
-        $opcionesMenu = '<li><a href="'.$mantAtenciones.'">ATENCIONES</a></li>';
+
+    if ($_SESSION["id_perfil"] == '1') { // PACIENTE
+        $opcionesMenu = '<li><a href="' . $mantAtenciones . '">ATENCIONES</a></li>';
     }
-    
-    if($_SESSION["id_perfil"] == '3'){ // SECRETARIA
-        $opcionesMenu = '<li><a href="'.$mantPacientes.'">PACIENTES</a></li>';
-        $opcionesMenu = $opcionesMenu.'<li><a href="'.$mantMedicos.'">MEDICOS</a></li>';
-        $opcionesMenu = $opcionesMenu.'<li><a href="'.$mantAtenciones.'">ATENCIONES</a></li>';              
+
+    if ($_SESSION["id_perfil"] == '3') { // SECRETARIA
+        $opcionesMenu = '<li><a href="' . $mantPacientes . '">PACIENTES</a></li>';
+        $opcionesMenu = $opcionesMenu . '<li><a href="' . $mantMedicos . '">MEDICOS</a></li>';
+        $opcionesMenu = $opcionesMenu . '<li><a href="' . $mantAtenciones . '">ATENCIONES</a></li>';
     }
-    
-    if($_SESSION["id_perfil"] == '4'){ // DIRECTOR
-        $opcionesMenu = '<li><a href="'.$mantPacientes.'">PACIENTES</a></li>';
-        $opcionesMenu = $opcionesMenu.'<li><a href="'.$mantMedicos.'">MEDICOS</a></li>';
-        $opcionesMenu = $opcionesMenu.'<li><a href="'.$mantAtenciones.'">ATENCIONES</a></li>';
-        $opcionesMenu = $opcionesMenu.'<li><a href="'.$estadisticas.'">ESTADISTICAS</a></li>'; 
+
+    if ($_SESSION["id_perfil"] == '4') { // DIRECTOR
+        $opcionesMenu = '<li><a href="' . $mantPacientes . '">PACIENTES</a></li>';
+        $opcionesMenu = $opcionesMenu . '<li><a href="' . $mantMedicos . '">MEDICOS</a></li>';
+        $opcionesMenu = $opcionesMenu . '<li><a href="' . $mantAtenciones . '">ATENCIONES</a></li>';
+        $opcionesMenu = $opcionesMenu . '<li><a href="' . $estadisticas . '">ESTADISTICAS</a></li>';
     }
-    
-    if($_SESSION["id_perfil"] == '5'){ // ADMINISTRADOR
-        $opcionesMenu = '<li><a href="'.$mantPacientes.'">PACIENTES</a></li>';
-        $opcionesMenu = $opcionesMenu.'<li><a href="'.$mantMedicos.'">MEDICOS</a></li>';
-        $opcionesMenu = $opcionesMenu.'<li><a href="'.$mantSecretarias.'">SECRETARIAS</a></li>';
-        $opcionesMenu = $opcionesMenu.'<li><a href="'.$mantDirectores.'">DIRECTORES</a></li>';
+
+    if ($_SESSION["id_perfil"] == '5') { // ADMINISTRADOR
+        $opcionesMenu = '<li><a href="' . $mantPacientes . '">PACIENTES</a></li>';
+        $opcionesMenu = $opcionesMenu . '<li><a href="' . $mantMedicos . '">MEDICOS</a></li>';
+        $opcionesMenu = $opcionesMenu . '<li><a href="' . $mantSecretarias . '">SECRETARIAS</a></li>';
+        $opcionesMenu = $opcionesMenu . '<li><a href="' . $mantDirectores . '">DIRECTORES</a></li>';
     }
-    
-    
 }
 ?>
 <!DOCTYPE html>
@@ -56,12 +55,12 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
         <link href="/HorasMedicas/frontend/css/bootstrap-theme.min.css" rel="stylesheet">
         <link href="/HorasMedicas/frontend/css/bootstrap.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="icon" href="../../favicon.ico">
+        <link rel="icon" href="/../HorasMedicas/Hospital.ico">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <title>Hospital Municipal</title>
-        
+
 
         <!-- Bootstrap core CSS -->
         <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
@@ -102,7 +101,7 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
         </nav>
         <br/>
         <br/>
-        
+        <br/>
 
 
         <div class="row">
@@ -123,81 +122,62 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
             <div class="col-md-3"></div>
             <div class="col-md-6">
                 <form action="#" method="POST" id="formularioPaciente">
+                    
                     <div class="form-group row">
-                        <label for="example-text-input" class="col-2 col-form-label">Rut</label>
-                        <div class="col-8">
-                            <input class="form-control" type="text" 
-                                   value="" 
-                                   id="txtRut" 
-                                   name="txtRut">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-2 col-form-label">Contraseña</label>
-                        <div class="input-group" id="contraseña">
-                            <input class="form-control" type="password" 
-                                   value="" 
-                                   id="txtContrasena" 
-                                   name="txtContrasena" />
-                            <span id="show-hide-passwd" action="hide" 
-                                  class="input-group-addon glyphicon glyphicon glyphicon-eye-open"></span>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="example-search-input" class="col-2 col-form-label">Nombre</label>
-                        <div class="col-8">
-                            <input class="form-control" type="text" 
-                                   value="" 
-                                   id="txtNombre"
-                                   name="txtNombre">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="example-email-input" class="col-2 col-form-label">Apellido</label>
-                        <div class="col-8">
-                            <input class="form-control" type="text" 
-                                   value="" 
-                                   id="txtApellido"
-                                   name="txtApellido">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="example-date-input" class="col-2 col-form-label">Fecha de Nacimiento</label>
-                        <div class="col-8">
-                            <input class="form-control" type="date" 
-                                   value="" 
-                                   id="dpFecha"
-                                   name="dpFecha">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="example-url-input" class="col-2 col-form-label">Direccion</label>
+                        <label for="example-url-input" class="col-2 col-form-label">Numero de Atención</label>
                         <div class="col-8">
                             <input class="form-control" type="text"
                                    value="" 
-                                   id="txtDireccion"
-                                   name="txtDireccion">
+                                   id="txtNumeroAtencion"
+                                   name="txtNumeroAtencion">
                         </div>
                     </div>
                     
                     <div class="form-group row">
-                        <label for="example-url-input" class="col-2 col-form-label">Teléfono</label>
+                        <label for="example-date-input" class="col-2 col-form-label">Fecha de Atención</label>
                         <div class="col-8">
-                            <input class="form-control" type="text"
+                            <input class="form-control" type="date" 
                                    value="" 
-                                   id="txtFono"
-                                   name="txtFono">
+                                   id="dpFechaAtencion"
+                                   name="dpFechaAtencion">
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-2 col-form-label">Sexo</label>
-                        <div class="col-5 selectContainer">
-                            <select class="form-control" name="cboSexo">
-                                <option value="">Seleccione Sexo</option>
-                                <option value="FEMENINO">Femenino</option>
-                                <option value="MASCULINO">Masculino</option>
+                        <label for="example-date-input" class="col-2 col-form-label">Hora de Atención</label>
+                        <div class="input-group clockpicker">
+                            <input type="text" class="form-control" value="00:00" id="txtHoraAtencion">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-time"></span>
+                            </span>
+                        </div>
+                    </div>
 
+                    <div class="form-group row">
+                        <label for="example-url-input" class="col-2 col-form-label">Rut Paciente</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text"
+                                   value="" 
+                                   id="txtRutPacienteAtencion"
+                                   name="txtRutPacienteAtencion">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="example-url-input" class="col-2 col-form-label">Nombre Paciente</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text"
+                                   value="" 
+                                   id="txtNombrePacienteAtencion"
+                                   name="txtNombrePacienteAtencion">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">Médico Tratante</label>
+                        <div class="col-5 selectContainer">
+                            <select class="form-control" name="cboMedico">
+                                <option value="">Seleccione Médico</option>
                             </select>
                         </div>
                     </div>
@@ -218,33 +198,32 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
             <div class="col-md-2"></div>
             <div class="col-md-8">
 
-                <h2 class="sub-header">Lista de Pacientes</h2>
+                <h2 class="sub-header">Lista de Atenciones</h2>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Rut</th>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Fecha de Nacimiento</th>
-                                <th>Sexo</th>
-                                <th>Direccion</th>
-                                <th>Telefono</th>
+                                <th>Numero</th>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>Paciente</th>
+                                <th>Medico</th>
+                                <th>Estado</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            foreach ($listaPersonas as $persona) {
+                            foreach ($listaAtenciones as $atencion) {
                                 /* @var $persona Persona */
                                 ?>
                                 <tr>
-                                    <td><?= $persona->getRut() ?></td>
-                                    <td><?= $persona->getNombre() ?></td>
-                                    <td><?= $persona->getApellido() ?></td>
-                                    <td><?= $persona->getFecha_nac() ?></td>
-                                    <td><?= $persona->getSexo() ?></td>
-                                    <td><?= $persona->getDireccion() ?></td>
-                                    <td><?= $persona->getTelefono() ?></td>
+                                    <td><?= $atencion->getRut() ?></td>
+                                    <td><?= $atencion->getNombre() ?></td>
+                                    <td><?= $atencion->getApellido() ?></td>
+                                    <td><?= $atencion->getFecha_nac() ?></td>
+                                    <td><?= $atencion->getSexo() ?></td>
+                                    <td><?= $atencion->getDireccion() ?></td>
+                                    <td><?= $atencion->getTelefono() ?></td>
                                 </tr>
                                 <?php
                             }

@@ -9,7 +9,8 @@ $clase = "";
 
 
 if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
-    $listaPersonas = PersonaController::ListarPersonasPorPerfil($_SESSION["id_perfil"]);
+    $perfilPaciente = 1;
+    $listaPersonas = PersonaController::ListarPersonasPorPerfil($perfilPaciente);
     $usuarioLogeado = $_SESSION["nombre"] . ' ' . $_SESSION["apellido"];
     $mantPacientes = 'MantenedorPacientes.php';
     $mantMedicos = 'MantenedorMedicos.php';

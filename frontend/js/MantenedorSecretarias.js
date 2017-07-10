@@ -63,13 +63,13 @@ jQuery(document).ready(function () {
             jQuery.getJSON("/HorasMedicas/backend/info-cliente2.php",
                     {rut: rut, pass: pass, nombre: nombre, apellido: apellido,
                         fecha_nac: fecha_nac, direccion: direccion, sexo: sexo,
-                        fono: fono, id: 1, opcion: 2},
+                        fono: fono, id: 3, opcion: 2},
                     function (resul) {
                         if (resul) {
-                            jQuery("#mensajePacientes").append("Paciente agregado correctamente");
+                            jQuery("#mensajePacientes").append("Secretaria agregada correctamente");
                             jQuery("#mensaje").addClass("alert alert-success");
                         } else {
-                            jQuery("#mensajePacientes").append("Error al agregar paciente. Intente nuevamente");
+                            jQuery("#mensajePacientes").append("Error al agregar Secretaria. Intente nuevamente");
                             jQuery("#mensaje").addClass("alert alert-danger");
                         }
                     });
@@ -92,10 +92,10 @@ jQuery(document).ready(function () {
             jQuery.getJSON("/HorasMedicas/backend/info-cliente2.php",
             {rut: rut,pass:pass,nombre:nombre,apellido:apellido,
                 fecha_nac:fecha_nac,direccion:direccion,sexo:sexo,
-                fono:fono,id:1,opcion:3}, 
+                fono:fono,id:3,opcion:3}, 
             function (resul) {
                 if(resul){
-                    jQuery("#mensajePacientes").append("Paciente Modificado Correctamente");
+                    jQuery("#mensajePacientes").append("Secretaria Modificada Correctamente");
                     jQuery("#mensaje").addClass("alert alert-success");
                 }else{
                     jQuery("#mensajePacientes").append("Error al modificar. Intente nuevamente");

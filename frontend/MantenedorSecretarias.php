@@ -1,9 +1,16 @@
 <?php
 session_start();
+include_once __DIR__ . "/../backend/controller/PersonaController.php";
 $usuarioLogeado = "";
 $opcionesMenu = "";
+$buscaPersona = new Persona();
+$mensajePacientes = "";
+$clase = "";
+
+
 if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
-    
+    $perfilPaciente = 3;
+    $listaPersonas = PersonaController::ListarPersonasPorPerfil($perfilPaciente);
     $usuarioLogeado = $_SESSION["nombre"] . ' ' . $_SESSION["apellido"];
     $mantPacientes = 'MantenedorPacientes.php';
     $mantMedicos = 'MantenedorMedicos.php';
@@ -11,38 +18,38 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
     $mantSecretarias = 'MantenedorSecretarias.php';
     $mantDirectores = 'MantenedorDirectores.php';
     $estadisticas = 'Estadisticas.php';
-    
-    if($_SESSION["id_perfil"] == '1'){ // PACIENTE
-        $opcionesMenu = '<li><a href="'.$mantAtenciones.'">ATENCIONES</a></li>';
+
+
+
+
+    if ($_SESSION["id_perfil"] == '1') { // PACIENTE
+        $opcionesMenu = '<li><a href="' . $mantAtenciones . '">ATENCIONES</a></li>';
     }
-    
-    if($_SESSION["id_perfil"] == '3'){ // SECRETARIA
-        $opcionesMenu = '<li><a href="'.$mantPacientes.'">PACIENTES</a></li>';
-        $opcionesMenu = $opcionesMenu.'<li><a href="'.$mantMedicos.'">MEDICOS</a></li>';
-        $opcionesMenu = $opcionesMenu.'<li><a href="'.$mantAtenciones.'">ATENCIONES</a></li>';              
+
+    if ($_SESSION["id_perfil"] == '3') { // SECRETARIA
+        $opcionesMenu = '<li><a href="' . $mantPacientes . '">PACIENTES</a></li>';
+        $opcionesMenu = $opcionesMenu . '<li><a href="' . $mantMedicos . '">MEDICOS</a></li>';
+        $opcionesMenu = $opcionesMenu . '<li><a href="' . $mantAtenciones . '">ATENCIONES</a></li>';
     }
-    
-    if($_SESSION["id_perfil"] == '4'){ // DIRECTOR
-        $opcionesMenu = '<li><a href="'.$mantPacientes.'">PACIENTES</a></li>';
-        $opcionesMenu = $opcionesMenu.'<li><a href="'.$mantMedicos.'">MEDICOS</a></li>';
-        $opcionesMenu = $opcionesMenu.'<li><a href="'.$mantAtenciones.'">ATENCIONES</a></li>';
-        $opcionesMenu = $opcionesMenu.'<li><a href="'.$estadisticas.'">ESTADISTICAS</a></li>'; 
+
+    if ($_SESSION["id_perfil"] == '4') { // DIRECTOR
+        $opcionesMenu = '<li><a href="' . $mantPacientes . '">PACIENTES</a></li>';
+        $opcionesMenu = $opcionesMenu . '<li><a href="' . $mantMedicos . '">MEDICOS</a></li>';
+        $opcionesMenu = $opcionesMenu . '<li><a href="' . $mantAtenciones . '">ATENCIONES</a></li>';
+        $opcionesMenu = $opcionesMenu . '<li><a href="' . $estadisticas . '">ESTADISTICAS</a></li>';
     }
-    
-    if($_SESSION["id_perfil"] == '5'){ // ADMINISTRADOR
-        $opcionesMenu = '<li><a href="'.$mantPacientes.'">PACIENTES</a></li>';
-        $opcionesMenu = $opcionesMenu.'<li><a href="'.$mantMedicos.'">MEDICOS</a></li>';
-        $opcionesMenu = $opcionesMenu.'<li><a href="'.$mantSecretarias.'">SECRETARIAS</a></li>';
-        $opcionesMenu = $opcionesMenu.'<li><a href="'.$mantDirectores.'">DIRECTORES</a></li>';
+
+    if ($_SESSION["id_perfil"] == '5') { // ADMINISTRADOR
+        $opcionesMenu = '<li><a href="' . $mantPacientes . '">PACIENTES</a></li>';
+        $opcionesMenu = $opcionesMenu . '<li><a href="' . $mantMedicos . '">MEDICOS</a></li>';
+        $opcionesMenu = $opcionesMenu . '<li><a href="' . $mantSecretarias . '">SECRETARIAS</a></li>';
+        $opcionesMenu = $opcionesMenu . '<li><a href="' . $mantDirectores . '">DIRECTORES</a></li>';
     }
-    
-    
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
-
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -50,30 +57,28 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <link href="/HorasMedicas/frontend/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/HorasMedicas/frontend/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/HorasMedicas/frontend/css/bootstrap-theme.css" rel="stylesheet">
-        <link href="/HorasMedicas/frontend/css/bootstrap-theme.min.css" rel="stylesheet">
-        <link href="/HorasMedicas/frontend/css/bootstrap.css" rel="stylesheet">
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="icon" href="../../favicon.ico">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-theme.css" rel="stylesheet">
+        <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link rel="icon" href="/../HorasMedicas/Hospital.ico">
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <title>Hospital Municipal</title>
+        <script src="js/jquery-3.2.1.js"></script>
+        <script src="js/jquery.Rut.js"></script>
         
-
-        <!-- Bootstrap core CSS -->
-        <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+        
+        <script src="js/MantenedorSecretarias.js" ></script>
+        
+        
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/holder.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <title>Hospital Municipal</title>
 
         <!-- Custom styles for this template -->
-        <link href="dashboard.css" rel="stylesheet">
-
-        <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-
+        <link href="css/dashboard.css" rel="stylesheet">
+        <link href="css/estilo.css" rel="stylesheet">
     </head>
 
     <body>
@@ -100,28 +105,164 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
                 </div>
             </div>
         </nav>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
 
-        <div>
-            <h1>
-                Menu Secretarias
-            </h1>
+        <br/>
+        <br/>
+        
+
+
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="" role="alert" 
+                     style="text-align: center" 
+                     id="mensaje" 
+                     value="">
+                    <label id="mensajePacientes"></label>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
         </div>
 
-        <!-- Bootstrap core JavaScript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-        <script src="../../dist/js/bootstrap.min.js"></script>
-        <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-        <script src="../../assets/js/vendor/holder.min.js"></script>
-        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <form action="#" method="POST" id="formularioPaciente">
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">Rut</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text" 
+                                   value="" 
+                                   id="txtRut" 
+                                   name="txtRut">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">Contraseña</label>
+                        <div class="input-group" id="contraseña">
+                            <input class="form-control" type="password" 
+                                   value="" 
+                                   id="txtContrasena" 
+                                   name="txtContrasena" />
+                            <span id="show-hide-passwd" action="hide" 
+                                  class="input-group-addon glyphicon glyphicon glyphicon-eye-open"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-search-input" class="col-2 col-form-label">Nombre</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text" 
+                                   value="" 
+                                   id="txtNombre"
+                                   name="txtNombre">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-email-input" class="col-2 col-form-label">Apellido</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text" 
+                                   value="" 
+                                   id="txtApellido"
+                                   name="txtApellido">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-date-input" class="col-2 col-form-label">Fecha de Nacimiento</label>
+                        <div class="col-8">
+                            <input class="form-control" type="date" 
+                                   value="" 
+                                   id="dpFecha"
+                                   name="dpFecha">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-url-input" class="col-2 col-form-label">Direccion</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text"
+                                   value="" 
+                                   id="txtDireccion"
+                                   name="txtDireccion">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="example-url-input" class="col-2 col-form-label">Teléfono</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text"
+                                   value="" 
+                                   id="txtFono"
+                                   name="txtFono">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">Sexo</label>
+                        <div class="col-5 selectContainer">
+                            <select class="form-control" name="cboSexo">
+                                <option value="">Seleccione Sexo</option>
+                                <option value="FEMENINO">Femenino</option>
+                                <option value="MASCULINO">Masculino</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="btn-group btn-group-justified">
+                    <?php if($_SESSION["id_perfil"] == 5){    
+                        echo "<a href='#' class='btn btn-primary' type='submit' id='btnAgregar'>Agregar</a><a href='#' class='btn btn-primary' type='submit' id='btnModificar'>Modificar</a>";
+                    } ?>
+                    
+                        <a href="#" class="btn btn-primary" type="submit" id="btnBuscar">Buscar</a>
+                        <a href="#" class="btn btn-primary" type="reset" id="btnLimpiar">Limpiar</a>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+
+                <h2 class="sub-header">Lista de Secretarias</h2>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Rut</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Fecha de Nacimiento</th>
+                                <th>Sexo</th>
+                                <th>Direccion</th>
+                                <th>Telefono</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            foreach ($listaPersonas as $persona) {
+                                /* @var $persona Persona */
+                                ?>
+                                <tr>
+                                    <td><?= $persona->getRut() ?></td>
+                                    <td><?= $persona->getNombre() ?></td>
+                                    <td><?= $persona->getApellido() ?></td>
+                                    <td><?= $persona->getFecha_nac() ?></td>
+                                    <td><?= $persona->getSexo() ?></td>
+                                    <td><?= $persona->getDireccion() ?></td>
+                                    <td><?= $persona->getTelefono() ?></td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+
     </body>
 </html>
-
 

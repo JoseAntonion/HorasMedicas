@@ -112,31 +112,36 @@ class PersonaDAO implements GenericDAO {
     }
 
     public function listarPorParametro($idRegistro) {
-        /*@var $persona Persona */
         
+        $listado = array();
         $sentencia = $this->conexion->prepare("SELECT * FROM PERSONA WHERE ID_PERFIL = :ID");
         
         $sentencia->bindParam(':ID', $idRegistro);
         
         $sentencia->execute();
 
-        
-        while($registro = $sentencia->fetch()) {            
+        if($sentencia != null) {
+            foreach($sentencia as $fila) {
+              
             $persona = new Persona();
-            $persona->setRut($registro["RUT"]);            
-            $persona->setContrasena($registro["CONTRASENA"]);
-            $persona->setNombre($registro["NOMBRE"]); 
-            $persona->setApellido($registro["APELLIDO"]);
-            $persona->setFecha_nac($registro["FECHA_NAC"]); 
-            $persona->setSexo($registro["SEXO"]); 
-            $persona->setDireccion($registro["DIRECCION"]); 
-            $persona->setTelefono($registro["TELEFONO"]); 
-            $persona->setValor_consulta($registro["VALOR_CONSULTA"]); 
-            $persona->setFecha_contrato($registro["FECHA_CONTRATO"]); 
-            $persona->setId_perfil($registro["ID_PERFIL"]); 
+            $persona->setRut($fila["RUT"]);            
+            $persona->setContrasena($fila["CONTRASENA"]);
+            $persona->setNombre($fila["NOMBRE"]); 
+            $persona->setApellido($fila["APELLIDO"]);
+            $persona->setFecha_nac($fila["FECHA_NAC"]); 
+            $persona->setSexo($fila["SEXO"]); 
+            $persona->setDireccion($fila["DIRECCION"]); 
+            $persona->setTelefono($fila["TELEFONO"]); 
+            $persona->setValor_consulta($fila["VALOR_CONSULTA"]); 
+            $persona->setFecha_contrato($fila["FECHA_CONTRATO"]); 
+            $persona->setId_perfil($fila["ID_PERFIL"]);
+            
+            array_push($listado, $persona);
+            
+            }
         }
         
-        return $persona;
+        return $listado;
     }
 
     public function BuscarPorIdJSON($idRegistro) {

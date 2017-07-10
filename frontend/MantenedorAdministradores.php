@@ -9,7 +9,7 @@ $clase = "";
 
 
 if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
-    $perfilPaciente = 4;
+    $perfilPaciente = 5;
     $listaPersonas = PersonaController::ListarPersonasPorPerfil($perfilPaciente);
     $usuarioLogeado = $_SESSION["nombre"] . ' ' . $_SESSION["apellido"];
     $mantPacientes = 'MantenedorPacientes.php';
@@ -68,7 +68,7 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
         <script src="js/jquery.Rut.js"></script>
         
         
-        <script src="js/MantenedorDirectores.js" ></script>
+        <script src="js/MantenedorAdministradores.js" ></script>
         
         
         <script src="js/bootstrap.min.js"></script>
@@ -225,7 +225,7 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
             <div class="col-md-2"></div>
             <div class="col-md-8">
 
-                <h2 class="sub-header">Lista de Directores</h2>
+                <h2 class="sub-header">Lista de Administradores</h2>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>

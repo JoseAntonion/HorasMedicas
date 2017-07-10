@@ -131,7 +131,9 @@ if (isset($_SESSION["nombre"]) && isset($_SESSION["apellido"])) {
                             <input class="form-control" type="text" 
                                    value="" 
                                    id="txtRut" 
-                                   name="txtRut">
+                                   name="txtRut"
+                                   maxlength="12"
+                                   required="">
                         </div>
                     </div>
                     <div class="form-group row">

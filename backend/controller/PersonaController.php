@@ -17,8 +17,8 @@ class PersonaController {
             return false;
         }       
         
-        //if(password_verify($clave, $usuario->getClave())) {
-        if($contrasena == $persona->getContrasena()) {            
+        if(password_verify($contrasena, $persona->getContrasena())) {
+            
             $_SESSION["rut"] = $persona->getRut();
             $_SESSION["nombre"] = $persona->getNombre();
             $_SESSION["apellido"] = $persona->getApellido();
@@ -51,11 +51,15 @@ class PersonaController {
         $persona = new Persona();
         $persona->setRut($rut);
         
-        $persona->setContrasena($pass);
+        $hash = password_hash($pass, PASSWORD_BCRYPT);
+        $persona->setContrasena($hash);
+        
+        $hash2 = password_hash($direccion, PASSWORD_BCRYPT);
+
         $persona->setNombre($nombre);
         $persona->setApellido($apellido);
         $persona->setFecha_nac($fecha_nac);
-        $persona->setDireccion($direccion);
+        $persona->setDireccion($hash2);
         $persona->setSexo($sexo);
         $persona->setTelefono($fono);
         $persona->setId_perfil($id);
@@ -70,11 +74,16 @@ class PersonaController {
         $persona = new Persona();
         $persona->setRut($rut);
         
-        $persona->setContrasena($pass);
+        $hash = password_hash($pass, PASSWORD_BCRYPT);
+        $persona->setContrasena($hash);
+        
+        $hash2 = password_hash($direccion, PASSWORD_BCRYPT);
+        
+        //$persona->setContrasena($pass);
         $persona->setNombre($nombre);
         $persona->setApellido($apellido);
         $persona->setFecha_nac($fecha_nac);
-        $persona->setDireccion($direccion);
+        $persona->setDireccion($hash2);
         $persona->setSexo($sexo);
         $persona->setTelefono($fono);
         $persona->setId_perfil($id);
@@ -101,7 +110,6 @@ class PersonaController {
         $conexion = DBConnection::getConexion();
         $personaDAO = new PersonaDAO($conexion);
         
-        //return $personaDAO->buscarPorId($idCliente);
         return $personaDAO->BuscarPorIdJSON($idCliente);
     }
  

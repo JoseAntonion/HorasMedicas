@@ -3,11 +3,6 @@
 include_once __DIR__."/../dao/DBConnection.php";
 include_once __DIR__."/../dao/AtencionDAO.php";
 
-/**
- * Description of PersonaController
- *
- * @author CETECOM
- */
 class AtencionController {    
     
     public static function listarAtencionesRegistradas() {

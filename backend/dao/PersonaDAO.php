@@ -5,11 +5,7 @@ include_once __DIR__."/../model/Persona.php";
 
 
 class PersonaDAO implements GenericDAO {
-    
-    /**
-     *
-     * @var PDO 
-     */
+
     
     private $conexion;
     

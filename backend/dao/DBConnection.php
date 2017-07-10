@@ -1,14 +1,5 @@
 <?php
 
-/*
- * DUOC UC
- * Escuela de Inform&acute;tica y Telecomunicaciones
- * Sede Padre Alonso de Ovalle
- * 
- * Dise&ntilde;o de Aplicaciones para Internet
- * DAI5501
- */
-
 class DBConnection {
 
     const HOST = "localhost";
@@ -110,14 +101,22 @@ class DBConnection {
                   
                   $mysqlConexion->exec("
                 INSERT INTO `persona` (`RUT`, `CONTRASENA`, `NOMBRE`, `APELLIDO`, `FECHA_NAC`, `SEXO`, `DIRECCION`, `TELEFONO`, `VALOR_CONSULTA`, `FECHA_CONTRATO`, `ID_PERFIL`) VALUES
-                ('1', '1', 'JUAN', 'PEREZ', '2017-07-02', 'MASCULINO', 'LALALAN', '1234', NULL, NULL, 1),
-                ('3', '3', 'MARIA', 'CACERES', NULL, NULL, NULL, NULL, NULL, '2017-07-02', 3),
-                ('2', '2', 'OSCAR', 'LEON', NULL, NULL, NULL, NULL, 10000, '2017-07-02', 2),
-                ('4', '4', 'WILL', 'SMITH', NULL, 'MASCULINO', 'CERCA DE AHI', '555555', NULL, '2017-07-02', 4),
-                ('5', '5', 'ITALO', 'MONTES', '2017-07-02', 'MASCULINO', 'MAPOCHO 4242', '12345', NULL, '2017-07-02', 5);
+                ('1', '$2y$10$0Yww2XVsXy12JRyORqtQT.WthNdTAZdzE0DFotgwINPPoeetJGf3u', 'JUAN', 'PEREZ', '2017-07-02', 'MASCULINO', 'LALALAN', '1234', NULL, NULL, 1),
+                ('3', '$2y$10$0Yww2XVsXy12JRyORqtQT.WthNdTAZdzE0DFotgwINPPoeetJGf3u', 'MARIA', 'CACERES', NULL, NULL, NULL, NULL, NULL, '2017-07-02', 3),
+                ('2', '$2y$10$0Yww2XVsXy12JRyORqtQT.WthNdTAZdzE0DFotgwINPPoeetJGf3u', 'OSCAR', 'LEON', NULL, NULL, NULL, NULL, 10000, '2017-07-02', 2),
+                ('4', '$2y$10$0Yww2XVsXy12JRyORqtQT.WthNdTAZdzE0DFotgwINPPoeetJGf3u', 'WILL', 'SMITH', NULL, 'MASCULINO', 'CERCA DE AHI', '555555', NULL, '2017-07-02', 4),
+                ('5', '$2y$10$0Yww2XVsXy12JRyORqtQT.WthNdTAZdzE0DFotgwINPPoeetJGf3u', 'ITALO', 'MONTES', '2017-07-02', 'MASCULINO', 'MAPOCHO 4242', '12345', NULL, '2017-07-02', 5);
                 ");
-
-            
+                
+                $mysqlConexion->exec("
+                INSERT INTO `atencion` (`ID_ATENCION`, `FECHA_ATENCION`, `HORA_ATENCION`, `ESTADO`, `RUT_PACIENTE`, `RUT_MEDICO`) VALUES
+                ('1', '01/01/2017', '08:30', 'AGENDADA', '1', '2'),
+                ('2', '02/01/2017', '08:40', 'CONFIRMADA', '1', '2'),
+                ('3', '03/01/2017', '08:50', 'ANULADA', '1', '2'),
+                ('4', '04/01/2017', '07:50', 'REALIZADA', '1', '2'),
+                ('5', '05/01/2017', '10:50', 'REALIZADA', '1', '2');
+                ");                    
+                  
             return $mysqlConexion;
             
         } catch (Exception $e) {
